@@ -21,6 +21,7 @@ android {
         applicationId "com.mygdx.game"
         minSdkVersion 9
         targetSdkVersion 25
+//        multiDexEnabled true
         versionCode 1
         versionName "1.0"
     }

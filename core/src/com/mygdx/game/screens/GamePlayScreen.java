@@ -5,14 +5,15 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.Constants;
+import com.mygdx.game.controller.GameScreenControls;
+import com.mygdx.game.utilits.Constants;
+import com.mygdx.game.entities.missiles.LightMissile;
 import com.mygdx.game.levels.Level;
 
 /**
@@ -21,11 +22,12 @@ import com.mygdx.game.levels.Level;
 
 public class GamePlayScreen extends InputAdapter implements Screen {
 
-    Level level;
-    SpriteBatch batch;
-    Viewport viewport;
-    MyGame game;
-    ShapeRenderer renderer;
+    private Level level;
+    private SpriteBatch batch;
+    private Viewport viewport;
+    private MyGame game;
+    private ShapeRenderer renderer;
+    private GameScreenControls controls;
 
     public GamePlayScreen(MyGame game){
         this.game = game;
@@ -38,6 +40,8 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         renderer = new ShapeRenderer();
         viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
         Gdx.input.setInputProcessor(this);
+
+        controls = new GameScreenControls(level);
     }
 
     @Override
@@ -51,7 +55,6 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         renderer.setProjectionMatrix(viewport.getCamera().combined);
         renderer.setAutoShapeType(true);
         renderer.setColor(Color.BLACK);
-
         batch.begin();
         batch.end();
         renderer.begin();
@@ -88,18 +91,23 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 tapPosition = viewport.unproject(new Vector2(screenX, screenY));
-        level.gg.velocity.add(level.gg.velocity.x - tapPosition.x,
-                level.gg.velocity.y - tapPosition.y);
+        controls.tapControlling(tapPosition, pointer);
+
         return true;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return super.touchDragged(screenX, screenY, pointer);
+        Vector2 tapPosition = viewport.unproject(new Vector2(screenX, screenY));
+        controls.tapDragging(tapPosition, pointer);
+
+        return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return super.touchUp(screenX, screenY, pointer, button);
+        Vector2 tapPosition = viewport.unproject(new Vector2(screenX, screenY));
+        controls.tapUp(tapPosition, pointer);
+        return true;
     }
 }

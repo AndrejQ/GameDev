@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.Constants;
+import com.mygdx.game.utilits.Constants;
 
 /**
  * Created by Asus123 on 14.12.2017.

@@ -1,0 +1,20 @@
+
+myGameTest.pack.png
+size: 512,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+alien
+  rotate: false
+  xy: 314, 2
+  size: 196, 257
+  orig: 196, 257
+  offset: 0, 0
+  index: -1
+ufo
+  rotate: false
+  xy: 2, 99
+  size: 310, 160
+  orig: 310, 160
+  offset: 0, 0
+  index: -1
