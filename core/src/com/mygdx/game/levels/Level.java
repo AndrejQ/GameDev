@@ -1,40 +1,43 @@
 package com.mygdx.game.levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.mygdx.game.entities.GG;
-import com.mygdx.game.entities.missiles.LightMissile;
-import com.mygdx.game.entities.missiles.Missile;
+import com.mygdx.game.entities.enemies.EnemiesManager;
+import com.mygdx.game.entities.missiles.MissilesManager;
+import com.mygdx.game.entities.particles.ParticleManager;
 
 /**
  * Created by Asus123 on 15.12.2017.
  */
 
 public class Level {
+
     public GG gg;
-    public DelayedRemovalArray<Missile> missiles;
+    public EnemiesManager enemiesManager;
+    public MissilesManager missilesManager;
+    public ParticleManager particleManager;
 
     public Level(){
+        enemiesManager = new EnemiesManager();
+        missilesManager = new MissilesManager();
+        particleManager = new ParticleManager();
         gg = new GG(this);
-        missiles = new DelayedRemovalArray<Missile>();
+
     }
 
     public void update(float delta){
         gg.update(delta);
-
-        for (Missile missile : missiles){
-            missile.update(delta);
-            if (missile.timeIsOver()){
-                missiles.removeValue(missile, false);
-            }
-        }
+        enemiesManager.update(delta);
+        missilesManager.update(delta);
+        particleManager.update(delta);
     }
 
-    public void render(ShapeRenderer renderer){
-        for (Missile missile : missiles){
-            missile.render(renderer);
-        }
-        gg.render(renderer);
+    public void render(SpriteBatch batch, ShapeRenderer renderer){
+        gg.render(batch, renderer);
+        enemiesManager.render(batch, renderer);
+        missilesManager.render(batch, renderer);
+        particleManager.render(batch, renderer);
     }
 }
