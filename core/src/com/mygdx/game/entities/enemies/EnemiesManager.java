@@ -2,10 +2,10 @@ package com.mygdx.game.entities.enemies;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.entities.GG;
 import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.utilits.Utils;
 
@@ -15,29 +15,41 @@ import com.mygdx.game.utilits.Utils;
 
 public class EnemiesManager {
     long startTime;
-    public DelayedRemovalArray<SimpleEnemie> simpleEnemies;
+    public DelayedRemovalArray<Enemy> enemies;
+    GG gg;
 
 
-    public EnemiesManager() {
-        simpleEnemies = new DelayedRemovalArray<SimpleEnemie>();
+    public EnemiesManager(GG gg) {
+        enemies = new DelayedRemovalArray<Enemy>();
         startTime = TimeUtils.nanoTime();
+        this.gg = gg;
     }
 
     public void update(float delta){
+
+        // spawn (around gg)
         if (Utils.timeElapsed(startTime) > 1 / Constants.SIMPLE_ENEMY_SPAWN_RATE_PER_SECOND){
-            simpleEnemies.add(new SimpleEnemie(new Vector2(MathUtils.random(Constants.WORLD_BOUNDS.width),
-                    MathUtils.random(Constants.WORLD_BOUNDS.height))));
+            enemies.add(new SimpleEnemy(Utils.randomVector(Constants.WORLD_SIZE).add(gg.position)));
 
             startTime = TimeUtils.nanoTime();
         }
-        for (SimpleEnemie simpleEnemie : simpleEnemies){
-            simpleEnemie.update(delta);
+        // update
+        for (Enemy enemy : enemies){
+            enemy.update(delta);
+            // cont distance for gg
+            enemy.dstForGG = new Vector2(gg.position).add(new Vector2(enemy.position).scl(-1));
+
+            if (enemy.dstForGG.len() > Constants.ENEMY_DISPOSE_DISTANCE){
+                enemies.removeValue(enemy, false);
+            }
         }
     }
 
     public void render(SpriteBatch batch, ShapeRenderer renderer){
-        for (SimpleEnemie simpleEnemie : simpleEnemies){
-            simpleEnemie.render(batch, renderer);
+
+        // render
+        for (Enemy enemy : enemies){
+            enemy.render(batch, renderer);
         }
     }
 }

@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.mygdx.game.entities.GameObject;
-import com.mygdx.game.entities.enemies.SimpleEnemie;
+import com.mygdx.game.entities.enemies.Enemy;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
 
@@ -28,12 +28,12 @@ public abstract class Missile extends GameObject {
         return false;
     }
 
-    public boolean collideWithEnemy(DelayedRemovalArray<SimpleEnemie> enemies){
-        for (SimpleEnemie enemie : enemies){
-            if (new Circle(enemie.position, enemie.radius).contains(position)){
-                enemie.missileCatch(this);
-                if (enemie.health < 0){
-                    enemies.removeValue(enemie, false);
+    public boolean collideWithEnemy(DelayedRemovalArray<Enemy> enemies){
+        for (Enemy enemy : enemies){
+            if (new Circle(enemy.position, enemy.radius).contains(position)){
+                enemy.missileCatch(this);
+                if (enemy.health < 0){
+                    enemies.removeValue(enemy, false);
                     Gdx.input.vibrate(30);
                 }
                 return true;
@@ -47,7 +47,7 @@ public abstract class Missile extends GameObject {
         return !Constants.WORLD_BOUNDS.contains(position);
     }
 
-    public void missileSparkling(){}
+    public void missileExplode(Enemy hostEnemy){}
 
-    public void missileSparkling(Vector2 direction){}
+    public void missileExplode(Enemy hostEnemy, Vector2 direction){}
 }

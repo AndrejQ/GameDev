@@ -20,10 +20,11 @@ public class Level {
     public ParticleManager particleManager;
 
     public Level(){
-        enemiesManager = new EnemiesManager();
         missilesManager = new MissilesManager();
         particleManager = new ParticleManager();
+        // TODO: 25.12.2017 make gg = new GG(!!without this!!) make environmentManager where use generateStars() method (remove it from gg)
         gg = new GG(this);
+        enemiesManager = new EnemiesManager(gg);
 
     }
 

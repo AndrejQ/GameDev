@@ -22,7 +22,7 @@ public class MissilesManager {
                 missiles.removeValue(missile, false);
             }
             // TODO: 18.12.2017 there is checking for colliding bullet and enemy. Maybe its not efficient.
-            if (missile.collideWithEnemy(missile.level.enemiesManager.simpleEnemies)){
+            if (missile.collideWithEnemy(missile.level.enemiesManager.enemies)){
                 missiles.removeValue(missile, false);
             }
         }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.entities.enemies.Enemy;
 import com.mygdx.game.entities.particles.Light;
 import com.mygdx.game.entities.particles.SparkleParticle;
 import com.mygdx.game.levels.Level;
@@ -54,7 +55,7 @@ public class LightMissile extends Missile {
     }
 
     @Override
-    public void missileSparkling(Vector2 direction) {
+    public void missileExplode(Enemy hostEnemy, Vector2 direction) {
         level.particleManager.particles.removeValue(lightParticle, false);
 
         float Bound = Constants.SPARKLE_PARTICLE_START_VELOCITY;
@@ -63,7 +64,7 @@ public class LightMissile extends Missile {
         // TODO: 19.12.2017 redo directioned sparckles (to be able to make regural explosions of sparkles)
         for (int i = 0; i < Constants.SPARKLE_PARTICLE_NUMBER; i++) {
             //speed of particles are random + direction
-            level.particleManager.particles.add(new SparkleParticle(new Vector2(position),
+            level.particleManager.particles.add(new SparkleParticle(hostEnemy, new Vector2(position),
                     //directed velocity of sparkle
                     Utils.randomVector(Bound).add(new Vector2(direction).scl(startVelosity))));
         }

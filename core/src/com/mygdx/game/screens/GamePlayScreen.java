@@ -34,6 +34,8 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     private GameScreenControls controls;
     private ChaseCam chaseCam;
 
+    private HudFPS hudFPS;
+
     public GamePlayScreen(MyGame game){
         this.game = game;
     }
@@ -52,6 +54,9 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         Gdx.input.setInputProcessor(this);
 
         controls = new GameScreenControls(level);
+
+        //fps
+        hudFPS = new HudFPS();
     }
 
     @Override
@@ -70,10 +75,13 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         level.render(batch, renderer);
         batch.end();
         renderer.end();
+        hudFPS.render(batch, delta); // fps
+
     }
 
     @Override
     public void resize(int width, int height) {
+        hudFPS.viewport.update(width, height, true);
         viewport.update(width, height, true);
     }
 
@@ -87,12 +95,12 @@ public class GamePlayScreen extends InputAdapter implements Screen {
 
     }
 
-    // TODO: 21.12.2017 What does hide() method make?
     @Override
     public void hide() {
-        batch.dispose();
-        Assets.instance.dispose();
-        renderer.dispose();
+//        batch.dispose();
+//        Assets.instance.dispose();
+//        renderer.dispose();
+
     }
 
     @Override

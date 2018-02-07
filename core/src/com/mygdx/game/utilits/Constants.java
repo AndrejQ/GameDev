@@ -18,12 +18,13 @@ public class Constants {
     public static final float GG_RADIUS = 10f;
     public static final float GG_MASS = 5f;
     public static final float WEAPON_SPRAY = 20f;
+    public static final float ENEMY_DISPOSE_DISTANCE = WORLD_SIZE * 2;
 
-    //simple enemie
-    public static final float SIMPLE_ENEMY_ADD_VELOCITY = 50f;
+    //simple enemy
+    public static final float SIMPLE_ENEMY_ADD_VELOCITY = 25f;
     public static final float SIMPLE_ENEMY_RADIUS = 15f;
     public static final float SIMPLE_ENEMY_HEALTH = 20f;
-    public static final float SIMPLE_ENEMY_TIME_BETWEEN_ADDING = 1f;
+    public static final float SIMPLE_ENEMY_TIME_BETWEEN_ADDING = 0.5f;
     public static final float SIMPLE_ENEMY_SPAWN_RATE_PER_SECOND = 0.2f;
 
     //Light missile
