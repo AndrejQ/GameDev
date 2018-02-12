@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGame;
@@ -19,6 +21,7 @@ import com.mygdx.game.utilits.ChaseCam;
 import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.entities.missiles.LightMissile;
 import com.mygdx.game.levels.Level;
+import com.mygdx.game.utilits.Params;
 
 /**
  * Created by Asus123 on 12.12.2017.
@@ -33,6 +36,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     private ShapeRenderer renderer;
     private GameScreenControls controls;
     private ChaseCam chaseCam;
+    private ColorAction colorAction;
 
     private HudFPS hudFPS;
 
@@ -51,6 +55,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         renderer = new ShapeRenderer();
         viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
         chaseCam = new ChaseCam(viewport.getCamera(), level.gg);
+        colorAction = new ColorAction();
         Gdx.input.setInputProcessor(this);
 
         controls = new GameScreenControls(level);
@@ -65,7 +70,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         level.update(delta);
 
         viewport.apply();
-        Gdx.gl.glClearColor(Constants.BACKGROUND_COLOR.r, Constants.BACKGROUND_COLOR.g, Constants.BACKGROUND_COLOR.b, 1);
+        Gdx.gl.glClearColor(Params.background_color.r, Params.background_color.g, Params.background_color.b, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(viewport.getCamera().combined);
         renderer.setProjectionMatrix(viewport.getCamera().combined);
@@ -83,6 +88,10 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     public void resize(int width, int height) {
         hudFPS.viewport.update(width, height, true);
         viewport.update(width, height, true);
+
+        //set camera position centered to gg when resized
+        chaseCam.getCamera().position.x = level.gg.position.x;
+        chaseCam.getCamera().position.y = level.gg.position.y;
     }
 
     @Override

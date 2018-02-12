@@ -23,4 +23,16 @@ public class Utils {
                 MathUtils.random(leftBound, rightBound));
         return vector;
     }
+
+    public static float pow2(float num){
+        return pow(num, 2);
+    }
+
+    public static float pow(float num, int power){
+        float number = num;
+        for (int i = 0; i < power - 1; i++) {
+            number *= num;
+        }
+        return number;
+    }
 }

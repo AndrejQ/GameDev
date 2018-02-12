@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.enemies;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -35,6 +36,9 @@ public class EnemiesManager {
         }
         // update
         for (Enemy enemy : enemies){
+            for (int i = 0; i < enemies.size; i++) {
+                enemy.collideWithOtherEnemy(enemies.get(i));
+            }
             enemy.update(delta);
             // cont distance for gg
             enemy.dstForGG = new Vector2(gg.position).add(new Vector2(enemy.position).scl(-1));

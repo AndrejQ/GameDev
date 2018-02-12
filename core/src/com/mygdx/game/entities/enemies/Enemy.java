@@ -10,6 +10,7 @@ import com.mygdx.game.entities.missiles.Missile;
 
 public abstract class Enemy extends GameObject {
     public float health;
+    float mass;
     Vector2 dstForGG;
 
     public Enemy() {}
@@ -17,4 +18,6 @@ public abstract class Enemy extends GameObject {
     void velocityUpdate(){}
 
     public void missileCatch(Missile missile){}
+
+    public void collideWithOtherEnemy(Enemy otherEnemy){}
 }

@@ -31,4 +31,8 @@ public class ChaseCam {
         camera.position.x += velocity.x * delta;
         camera.position.y += velocity.y * delta;
     }
+
+    public Camera getCamera() {
+        return camera;
+    }
 }

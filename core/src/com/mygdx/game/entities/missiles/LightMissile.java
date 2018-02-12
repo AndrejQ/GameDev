@@ -59,14 +59,14 @@ public class LightMissile extends Missile {
         level.particleManager.particles.removeValue(lightParticle, false);
 
         float Bound = Constants.SPARKLE_PARTICLE_START_VELOCITY;
-        float startVelosity = Constants.SPARKLE_PARTICLE_START_VELOCITY;
+        float startVelocity = Constants.SPARKLE_PARTICLE_START_VELOCITY;
 
-        // TODO: 19.12.2017 redo directioned sparckles (to be able to make regural explosions of sparkles)
+        // TODO: 19.12.2017 redirect sparkles (to be able to make regular explosions of sparkles)
         for (int i = 0; i < Constants.SPARKLE_PARTICLE_NUMBER; i++) {
             //speed of particles are random + direction
             level.particleManager.particles.add(new SparkleParticle(hostEnemy, new Vector2(position),
                     //directed velocity of sparkle
-                    Utils.randomVector(Bound).add(new Vector2(direction).scl(startVelosity))));
+                    Utils.randomVector(Bound).add(new Vector2(direction).scl(startVelocity))));
         }
     }
 }

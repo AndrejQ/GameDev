@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.utilits.ColorChanger;
 import com.mygdx.game.utilits.Constants;
 
 /**
@@ -24,6 +26,7 @@ public class MenuScreen extends InputAdapter implements Screen {
     Viewport viewport;
     SpriteBatch batch;
     BitmapFont font;
+    private ColorChanger colorChanger;
 
     public MenuScreen(MyGame game){
         this.game = game;
@@ -40,6 +43,13 @@ public class MenuScreen extends InputAdapter implements Screen {
     public void show() {
         batch = new SpriteBatch();
 
+        colorChanger = new ColorChanger();
+        colorChanger.setAllColorsDuration(10);
+        colorChanger.addColorState(new Color(Color.RED));
+        colorChanger.addColorState(new Color(Color.BROWN));
+        colorChanger.addColorState(new Color(Color.MAROON));
+        colorChanger.addColorState(new Color(Color.FIREBRICK));
+
         viewport = new ExtendViewport(3 * Constants.WORLD_SIZE, 3 * Constants.WORLD_SIZE);
         font = new BitmapFont();
         font.getData().setScale(3);
@@ -50,10 +60,11 @@ public class MenuScreen extends InputAdapter implements Screen {
     @Override
     public void render(float delta) {
         viewport.apply();
+        colorChanger.act(delta);
         Gdx.gl.glClearColor(
-                Constants.BACKGROUND_COLOR.r,
-                Constants.BACKGROUND_COLOR.g,
-                Constants.BACKGROUND_COLOR.b,
+                colorChanger.getColor().r,
+                colorChanger.getColor().g,
+                colorChanger.getColor().b,
                 Constants.BACKGROUND_COLOR.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(viewport.getCamera().combined);

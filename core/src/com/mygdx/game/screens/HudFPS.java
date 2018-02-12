@@ -25,7 +25,7 @@ public class HudFPS {
         viewport.apply();
         batch.setProjectionMatrix(viewport.getCamera().combined);
         batch.begin();
-        String fps = String.format("%(.1f FPS", 1/delta);
+        String fps = String.format("%(.1f", 1/delta);
         font.draw(batch, fps, 10f, viewport.getWorldHeight() - 10f);
         batch.end();
     }

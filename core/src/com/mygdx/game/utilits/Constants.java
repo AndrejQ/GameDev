@@ -26,6 +26,7 @@ public class Constants {
     public static final float SIMPLE_ENEMY_HEALTH = 20f;
     public static final float SIMPLE_ENEMY_TIME_BETWEEN_ADDING = 0.5f;
     public static final float SIMPLE_ENEMY_SPAWN_RATE_PER_SECOND = 0.2f;
+    public static final float SIMPLE_ENEMY_MASS = 10f;
 
     //Light missile
     public static final float LIGHT_MISSILE_MASS = 0.2f;
