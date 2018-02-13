@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
@@ -59,6 +60,8 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         Gdx.input.setInputProcessor(this);
 
         controls = new GameScreenControls(level);
+
+        Gdx.input.setCatchBackKey(true);
 
         //fps
         hudFPS = new HudFPS();
@@ -141,5 +144,13 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         Vector2 tapPosition = viewport.unproject(new Vector2(screenX, screenY));
         controls.tapUp(tapPosition, pointer);
         return true;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.BACK){
+            game.setMenueScreen();
+        }
+        return false;
     }
 }

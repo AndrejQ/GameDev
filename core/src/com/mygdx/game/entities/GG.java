@@ -12,6 +12,7 @@ import com.mygdx.game.entities.particles.Star;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.entities.modifications.Modification;
+import com.mygdx.game.utilits.Params;
 import com.mygdx.game.utilits.Utils;
 
 /**
@@ -19,7 +20,6 @@ import com.mygdx.game.utilits.Utils;
  */
 
 public class GG extends GameObject{
-
     private long startTimeForStars;
     public boolean isTousched;
     public Vector2 tapPosition;
@@ -53,9 +53,9 @@ public class GG extends GameObject{
     }
 
     public GG(Level level) {
-
         this.level = level;
         radius = Constants.GG_RADIUS;
+        mass = Params.gg_mass;
         init(new Vector2(Constants.WORLD_SIZE/2, Constants.WORLD_SIZE/2));
         //for star generating per second
         startTimeForStars = TimeUtils.nanoTime();

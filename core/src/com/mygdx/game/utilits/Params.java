@@ -8,4 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 
 public class Params {
     public static Color background_color = new Color(Constants.BACKGROUND_COLOR);
+
+    // gg params
+    public static float gg_mass = new Float(Constants.GG_MASS);
 }

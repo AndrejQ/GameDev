@@ -36,6 +36,7 @@ public class EnemiesManager {
         }
         // update
         for (Enemy enemy : enemies){
+            enemy.collideWithObject(gg);
             for (int i = 0; i < enemies.size; i++) {
                 enemy.collideWithOtherEnemy(enemies.get(i));
             }
@@ -43,7 +44,7 @@ public class EnemiesManager {
             // cont distance for gg
             enemy.dstForGG = new Vector2(gg.position).add(new Vector2(enemy.position).scl(-1));
 
-            if (enemy.dstForGG.len() > Constants.ENEMY_DISPOSE_DISTANCE){
+            if (enemy.dstForGG.len2() > Utils.pow2(Constants.ENEMY_DISPOSE_DISTANCE)){
                 enemies.removeValue(enemy, false);
             }
         }
