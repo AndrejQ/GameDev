@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Assets;
 import com.mygdx.game.utilits.Constants;
 
@@ -12,10 +13,14 @@ import com.mygdx.game.utilits.Constants;
  */
 
 public class Light extends Particle {
-    public Light(Vector2 position, Vector2 velocity) {
-        super(position, velocity);
-        radius = Constants.LIGHT_RADIUS;
+    public Light(Vector2 position, Vector2 velocity, Level level) {
+        this(position, velocity, Constants.LIGHT_RADIUS, level);
+    }
+
+    public Light(Vector2 position, Vector2 velocity, float radius, Level level) {
+        super(position, velocity, level);
         lifeTime = Constants.LIGHT_LIFETIME;
+        this.radius = radius;
     }
 
     @Override

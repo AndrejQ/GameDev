@@ -29,18 +29,18 @@ public class Constants {
     public static final float SIMPLE_ENEMY_MASS = 10f;
 
     //Light missile
-    public static final float LIGHT_MISSILE_MASS = 0.2f;
-    public static final float LIGHT_MISSILE_DAMAGE = 1f;
+    public static final float LIGHT_MISSILE_MASS = 0.5f;
+    public static final float LIGHT_MISSILE_DAMAGE = 2f;
     public static final float LIGHT_MISSILE_VELOCITY = 200f;
     public static final float LIGHT_MISSILE_LIFETIME = 2f;
-    public static final float LIGHT_MISSILE_SPAWN_PER_SECOND= 15f;
-    public static final float LIGHT_MISSILE_LENGTH= 3f;
-    public static final float LIGHT_MISSILE_WIDTH= 0.7f;
+    public static final float LIGHT_MISSILE_SPAWN_PER_SECOND= 8f;
+    public static final float LIGHT_MISSILE_LENGTH= 5f;
+    public static final float LIGHT_MISSILE_WIDTH= 3f;
 //    public static final float LIGHT_MISSILE_AERODYNAMICS= 0.5f; //0..1
 
     // Sparkle particle
     public static final float SPARKLE_PARTICLE_LIFE_TIME = 0.3f;
-    public static final float SPARKLE_PARTICLE_SIZE = 1f;
+    public static final float SPARKLE_PARTICLE_SIZE = 2f;
     public static final float SPARKLE_PARTICLE_FRICTION = 0.1f;
     public static final int SPARKLE_PARTICLE_NUMBER = 10;
     public static final float SPARKLE_PARTICLE_START_VELOCITY = 100f;

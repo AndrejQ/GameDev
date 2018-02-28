@@ -1,5 +1,6 @@
 package com.mygdx.game.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -12,7 +13,6 @@ import com.mygdx.game.entities.particles.Star;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.entities.modifications.Modification;
-import com.mygdx.game.utilits.Params;
 import com.mygdx.game.utilits.Utils;
 
 /**
@@ -21,9 +21,18 @@ import com.mygdx.game.utilits.Utils;
 
 public class GG extends GameObject{
     private long startTimeForStars;
-    public boolean isTousched;
+    public boolean isPlayerTouching;
     public Vector2 tapPosition;
     Array<? extends Modification> modifications;
+
+    public GG(Vector2 position, Vector2 velocity, Level level) {
+        super(position, velocity, level);
+        radius = Constants.GG_RADIUS;
+    }
+
+//    public GG(Level level) {
+//        this.level = level;
+//    }
 
     @Override
     public void update(float delta) {
@@ -31,7 +40,7 @@ public class GG extends GameObject{
         super.update(delta);
 
         // light missile spawn
-        if (isTousched){
+        if (isPlayerTouching){
             if (Utils.timeElapsed(startTime) > 1 / Constants.LIGHT_MISSILE_SPAWN_PER_SECOND){
                 missileSpawn(tapPosition);
                 startTime = TimeUtils.nanoTime();
@@ -50,15 +59,6 @@ public class GG extends GameObject{
     public void render(SpriteBatch batch, ShapeRenderer renderer) {
         renderer.set(ShapeRenderer.ShapeType.Filled);
         super.render(batch, renderer);
-    }
-
-    public GG(Level level) {
-        this.level = level;
-        radius = Constants.GG_RADIUS;
-        mass = Params.gg_mass;
-        init(new Vector2(Constants.WORLD_SIZE/2, Constants.WORLD_SIZE/2));
-        //for star generating per second
-        startTimeForStars = TimeUtils.nanoTime();
     }
 
 
@@ -103,6 +103,6 @@ public class GG extends GameObject{
 
     private void generateStar(){
         level.particleManager.stars.add(new Star(Utils.randomVector(2 * Constants.WORLD_SIZE).add(position),
-                new Vector2()));
+                new Vector2(), level));
     }
 }

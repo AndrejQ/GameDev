@@ -17,12 +17,16 @@ public abstract class Missile extends GameObject {
 
     public float damage;
 
-
-    public Missile(Vector2 position, Vector2 velocity, Level level){
-        this.position = position;
-        this.velocity = velocity;
-        this.level = level;
+    public Missile(Vector2 position, Vector2 velocity, Level level) {
+        super(position, velocity, level);
     }
+
+
+//    public Missile(Vector2 position, Vector2 velocity, Level level){
+//        this.position = position;
+//        this.velocity = velocity;
+//        this.level = level;
+//    }
 
     public boolean timeIsOver(){
         return false;

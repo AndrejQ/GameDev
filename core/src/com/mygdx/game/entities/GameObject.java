@@ -1,11 +1,9 @@
 package com.mygdx.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
@@ -25,6 +23,12 @@ public abstract class GameObject {
 
     public float radius;
 
+    public GameObject(Vector2 position, Vector2 velocity, Level level) {
+        this.position = position;
+        this.velocity = velocity;
+        this.level = level;
+    }
+
     public void update(float delta) {
         position.mulAdd(velocity, delta);
 
@@ -41,15 +45,16 @@ public abstract class GameObject {
     }
 
     public void render(SpriteBatch batch, ShapeRenderer renderer){
-        //TODO: Dont forget to change ShapeRenderer to Spritebatch
+        //TODO: Don't forget to change ShapeRenderer to SpriteBatch
         renderer.setColor(Color.LIGHT_GRAY);
         renderer.set(ShapeRenderer.ShapeType.Filled);
-        renderer.circle(position.x, position.y, radius);
+        renderer.circle(position.x, position.y, radius, 20);
     }
 
     public boolean collideWithWalls(){
         return Constants.WORLD_BOUNDS.contains(new Circle(position, radius));
     }
+
 
     public void collideWithObject(GameObject object){
         // check if overlapping

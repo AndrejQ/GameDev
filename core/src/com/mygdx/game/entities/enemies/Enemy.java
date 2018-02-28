@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entities.GG;
 import com.mygdx.game.entities.GameObject;
 import com.mygdx.game.entities.missiles.Missile;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Utils;
 
 /**
@@ -14,7 +15,9 @@ public abstract class Enemy extends GameObject {
     public float health;
     Vector2 dstForGG;
 
-    public Enemy() {}
+    public Enemy(Vector2 position, Vector2 velocity, Level level) {
+        super(position, velocity, level);
+    }
 
     void velocityUpdate(){}
 

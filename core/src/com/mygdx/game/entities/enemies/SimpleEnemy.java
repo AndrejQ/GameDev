@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.entities.missiles.Missile;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.utilits.Utils;
 
@@ -17,6 +18,18 @@ public class SimpleEnemy extends Enemy {
     private long startTime;
     private float timeBetweenAdding = Constants.SIMPLE_ENEMY_TIME_BETWEEN_ADDING;
 
+    public SimpleEnemy(Vector2 position, Level level){
+        this(position, new Vector2(), level);
+    }
+
+    public SimpleEnemy(Vector2 position, Vector2 velocity, Level level) {
+        super(position, velocity, level);
+        radius = Constants.SIMPLE_ENEMY_RADIUS;
+        health = Constants.SIMPLE_ENEMY_HEALTH;
+        setMass(Constants.SIMPLE_ENEMY_MASS);
+        startTime = TimeUtils.nanoTime();
+    }
+
     @Override
     public void update(float delta) {
         velocity.mulAdd(velocity, -Constants.FRICTION); // air friction
@@ -26,15 +39,6 @@ public class SimpleEnemy extends Enemy {
             this.velocityUpdate();
             startTime = TimeUtils.nanoTime();
         }
-    }
-
-    public SimpleEnemy(Vector2 position) {
-        radius = Constants.SIMPLE_ENEMY_RADIUS;
-        health = Constants.SIMPLE_ENEMY_HEALTH;
-        setMass(Constants.SIMPLE_ENEMY_MASS);
-        this.position = position;
-        this.velocity = new Vector2();
-        startTime = TimeUtils.nanoTime();
     }
 
     @Override

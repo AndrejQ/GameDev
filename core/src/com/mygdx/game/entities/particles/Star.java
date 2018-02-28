@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Assets;
 import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.utilits.Utils;
@@ -16,8 +17,8 @@ import com.mygdx.game.utilits.Utils;
 public class Star extends Particle {
     public float offset = 0;
 
-    public Star(Vector2 position, Vector2 velocity) {
-        super(position, velocity);
+    public Star(Vector2 position, Vector2 velocity, Level level) {
+        super(position, velocity, level);
         lifeTime = Constants.STAR_LIFETIME;
         radius = Constants.STAR_RADIUS;
     }

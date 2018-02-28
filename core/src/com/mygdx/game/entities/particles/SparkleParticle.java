@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entities.enemies.Enemy;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
 
 /**
@@ -16,23 +17,31 @@ import com.mygdx.game.utilits.Constants;
 public class SparkleParticle extends Particle {
 
     private float size;
+    Light lightParticle;
 
-    public SparkleParticle(Vector2 position, Vector2 velocity) {
-        this(null, position, velocity);
+    public SparkleParticle(Vector2 position, Vector2 velocity, Level level) {
+        this(null, position, velocity, level);
     }
 
-    public SparkleParticle(Enemy enemy, Vector2 position, Vector2 velocity) {
-        super(enemy, position, velocity);
-        lifeTime = Constants.SPARKLE_PARTICLE_LIFE_TIME;
+    public SparkleParticle(Enemy enemy, Vector2 position, Vector2 velocity, Level level) {
+        super(enemy, position, velocity, level);
+        setLifeTime(Constants.SPARKLE_PARTICLE_LIFE_TIME);
         //different size of sparkle
         size = MathUtils.random(Constants.SPARKLE_PARTICLE_SIZE - 0.7f) + 0.7f ;
+
+        // adding light of sparkle
+        lightParticle = new Light(position, velocity, 2 * size, level);
+        lightParticle.setLifeTime(this.getLifeTime());
+        level.particleManager.particles.add(lightParticle);
+
     }
 
     @Override
     public void render(SpriteBatch batch, ShapeRenderer renderer) {
+//        lightParticle.render(batch, renderer);
         renderer.setColor(Color.YELLOW);
         renderer.set(ShapeRenderer.ShapeType.Filled);
-        renderer.rect(position.x, position.y, size, size);
+        renderer.rect(position.x - size / 2, position.y - size / 2, size, size);
     }
 
     @Override

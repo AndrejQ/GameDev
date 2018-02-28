@@ -3,6 +3,7 @@ package com.mygdx.game.levels;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entities.GG;
 import com.mygdx.game.entities.enemies.EnemiesManager;
 import com.mygdx.game.entities.missiles.MissilesManager;
@@ -23,7 +24,7 @@ public class Level {
         missilesManager = new MissilesManager();
         particleManager = new ParticleManager();
         // TODO: 25.12.2017 make gg = new GG(!!without this!!) make environmentManager where use generateStars() method (remove it from gg)
-        gg = new GG(this);
+        gg = new GG(new Vector2(), new Vector2(), this);
         enemiesManager = new EnemiesManager(gg);
 
     }

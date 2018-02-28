@@ -21,7 +21,7 @@ public class GameScreenControls {
     public void tapControlling(Vector2 tapPosition, int pointer){
         if (singlePointer == 0){
             singlePointer = pointer;
-            level.gg.isTousched = true;
+            level.gg.isPlayerTouching = true;
             level.gg.tapPosition = tapPosition;
         }
     }
@@ -36,7 +36,7 @@ public class GameScreenControls {
     //touch up
     public void tapUp(Vector2 tapPosition, int pointer){
         singlePointer = 0;
-        level.gg.isTousched = false;
+        level.gg.isPlayerTouching = false;
     }
 
 

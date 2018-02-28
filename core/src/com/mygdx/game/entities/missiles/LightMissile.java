@@ -30,7 +30,7 @@ public class LightMissile extends Missile {
         damage = Constants.LIGHT_MISSILE_DAMAGE;
 
         // add light
-        lightParticle = new Light(this.position, this.velocity);
+        lightParticle = new Light(this.position, this.velocity, 2*Constants.LIGHT_MISSILE_LENGTH, level);
         level.particleManager.particles.add(lightParticle);
     }
 
@@ -66,7 +66,7 @@ public class LightMissile extends Missile {
             //speed of particles are random + direction
             level.particleManager.particles.add(new SparkleParticle(hostEnemy, new Vector2(position),
                     //directed velocity of sparkle
-                    Utils.randomVector(Bound).add(new Vector2(direction).scl(startVelocity))));
+                    Utils.randomVector(Bound).add(new Vector2(direction).scl(startVelocity)), level));
         }
     }
 }

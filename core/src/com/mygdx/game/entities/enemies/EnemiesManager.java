@@ -30,7 +30,7 @@ public class EnemiesManager {
 
         // spawn (around gg)
         if (Utils.timeElapsed(startTime) > 1 / Constants.SIMPLE_ENEMY_SPAWN_RATE_PER_SECOND){
-            enemies.add(new SimpleEnemy(Utils.randomVector(Constants.WORLD_SIZE).add(gg.position)));
+            enemies.add(new SimpleEnemy(Utils.randomVector(Constants.WORLD_SIZE).add(gg.position), gg.level));
 
             startTime = TimeUtils.nanoTime();
         }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.entities.GameObject;
 import com.mygdx.game.entities.enemies.Enemy;
+import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Utils;
 
 /**
@@ -11,20 +12,20 @@ import com.mygdx.game.utilits.Utils;
  */
 
 public abstract class Particle extends GameObject {
-    public float lifeTime;
+
+    protected float lifeTime;
 
     // Enemy with explosion (particles)
     private Enemy mHostEnemy;
 
-    public Particle(Enemy hostEnemy,Vector2 position, Vector2 velocity){
-        this(position, velocity);
-        this.mHostEnemy = hostEnemy;
+    public Particle(Vector2 position, Vector2 velocity, Level level) {
+        super(position, velocity, level);
+        this.startTime = TimeUtils.nanoTime();
     }
 
-    public Particle(Vector2 position, Vector2 velocity) {
-        this.position = position;
-        this.velocity = velocity;
-        this.startTime = TimeUtils.nanoTime();
+    public Particle(Enemy hostEnemy,Vector2 position, Vector2 velocity, Level level){
+        this(position, velocity, level);
+        this.mHostEnemy = hostEnemy;
     }
 
     public boolean isTimeElapsed(){
@@ -38,5 +39,14 @@ public abstract class Particle extends GameObject {
         if (mHostEnemy != null) {
             position.mulAdd(mHostEnemy.velocity, delta);
         }
+    }
+
+    public void setLifeTime(float lifeTime) {
+        this.lifeTime = lifeTime;
+    }
+
+    public float getLifeTime() {
+
+        return lifeTime;
     }
 }
