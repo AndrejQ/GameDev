@@ -28,6 +28,7 @@ public class LightMissile extends Missile {
         super(position, velocity, level);
         startTime = TimeUtils.nanoTime();
         damage = Constants.LIGHT_MISSILE_DAMAGE;
+        lifetime = Constants.LIGHT_MISSILE_LIFETIME;
 
         // add light
         lightParticle = new Light(this.position, this.velocity, 2*Constants.LIGHT_MISSILE_LENGTH, level);
@@ -37,21 +38,48 @@ public class LightMissile extends Missile {
 
     @Override
     public void render(SpriteBatch batch, ShapeRenderer renderer) {
-        renderer.setColor(Color.YELLOW);
         renderer.set(ShapeRenderer.ShapeType.Filled);
-        //(position - velocity.nor, position)
-        renderer.rectLine(new Vector2(position).add( new Vector2(velocity).nor().scl(-Constants.LIGHT_MISSILE_LENGTH)),
-                new Vector2(position), Constants.LIGHT_MISSILE_WIDTH);
+
+        float s = Constants.LIGHT_MISSILE_LENGTH * Constants.LIGHT_MISSILE_WIDTH;
+        float dynamicalLength = Constants.LIGHT_MISSILE_LENGTH * (1 -
+                0.4f * MathUtils.sin(Constants.LIGHT_MISSILE_WOBBLE_FREQUENCY * Utils.timeElapsed(startTime)));
+        float dynamicalWidth = s / dynamicalLength;
+
+        Vector2 norVelocity = new Vector2(velocity).nor();
+        Vector2 front = new Vector2(position).add(new Vector2(norVelocity).scl(dynamicalLength / 2));
+
+//        // (position - velocity.nor, position)
+//        renderer.setColor(Color.YELLOW);
+//        renderer.rectLine(front,
+//                new Vector2(position).add(new Vector2(norVelocity).scl(- dynamicalLength)),
+//                dynamicalWidth);
+//
+//        front = new Vector2(position).add(new Vector2(norVelocity).scl(0.6f * dynamicalLength / 2));
+//
+//        renderer.setColor(Color.WHITE);
+//        renderer.rectLine(new Vector2(front).add(new Vector2(norVelocity).scl(-1+0.6f)),
+//                new Vector2(position).add(new Vector2(norVelocity).scl(- 0.6f * dynamicalLength)),
+//                0.6f * dynamicalWidth);
+
+        // (position - velocity.nor, position)
+        renderer.setColor(Color.YELLOW);
+        drawMissile(renderer, front, norVelocity, dynamicalLength, dynamicalWidth, 1);
+        front = new Vector2(position).add(new Vector2(norVelocity).scl(0.6f * dynamicalLength / 2));
+        renderer.setColor(Color.WHITE);
+        drawMissile(renderer, front, norVelocity, dynamicalLength, dynamicalWidth, 0.6f);
+
+    }
+
+    // draw fancy missile
+    private void drawMissile(ShapeRenderer renderer, Vector2 front, Vector2 norVelocity, float dynamicalLength, float dynamicalWidth, float coefficient){
+        renderer.rectLine(new Vector2(front).add(new Vector2(norVelocity).scl(-1+coefficient)),
+                new Vector2(position).add(new Vector2(norVelocity).scl(- coefficient * dynamicalLength)),
+                coefficient * dynamicalWidth);
     }
 
     @Override
     public void update(float delta) {
         super.update(delta);
-    }
-
-    @Override
-    public boolean timeIsOver(){
-        return timeElapsed(startTime) > Constants.LIGHT_MISSILE_LIFETIME;
     }
 
     @Override

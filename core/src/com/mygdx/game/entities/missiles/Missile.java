@@ -9,6 +9,8 @@ import com.mygdx.game.entities.enemies.Enemy;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
 
+import static com.mygdx.game.utilits.Utils.timeElapsed;
+
 /**
  * Created by Asus123 on 15.12.2017.
  */
@@ -16,6 +18,7 @@ import com.mygdx.game.utilits.Constants;
 public abstract class Missile extends GameObject {
 
     public float damage;
+    protected float lifetime;
 
     public Missile(Vector2 position, Vector2 velocity, Level level) {
         super(position, velocity, level);
@@ -29,7 +32,7 @@ public abstract class Missile extends GameObject {
 //    }
 
     public boolean timeIsOver(){
-        return false;
+        return timeElapsed(startTime) > lifetime;
     }
 
     public boolean collideWithEnemy(DelayedRemovalArray<Enemy> enemies){

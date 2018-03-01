@@ -31,11 +31,12 @@ public class Constants {
     //Light missile
     public static final float LIGHT_MISSILE_MASS = 0.5f;
     public static final float LIGHT_MISSILE_DAMAGE = 2f;
-    public static final float LIGHT_MISSILE_VELOCITY = 200f;
+    public static final float LIGHT_MISSILE_VELOCITY = 100f;
     public static final float LIGHT_MISSILE_LIFETIME = 2f;
-    public static final float LIGHT_MISSILE_SPAWN_PER_SECOND= 8f;
-    public static final float LIGHT_MISSILE_LENGTH= 5f;
-    public static final float LIGHT_MISSILE_WIDTH= 3f;
+    public static final float LIGHT_MISSILE_SPAWN_PER_SECOND = 8f;
+    public static final float LIGHT_MISSILE_LENGTH = 4f;
+    public static final float LIGHT_MISSILE_WIDTH = 4f;
+    public static final float LIGHT_MISSILE_WOBBLE_FREQUENCY = 30f;
 //    public static final float LIGHT_MISSILE_AERODYNAMICS= 0.5f; //0..1
 
     // Sparkle particle
