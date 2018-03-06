@@ -20,6 +20,11 @@ public class Constants {
     public static final float WEAPON_SPRAY = 20f;
     public static final float ENEMY_DISPOSE_DISTANCE = WORLD_SIZE * 2;
 
+    //Background
+    public static final float BACKGROUND_CELL_SIZE = 20f;
+    public static final int BACKGROUND_CHUNK_SIZE = 2;
+
+
     //simple enemy
     public static final float SIMPLE_ENEMY_ADD_VELOCITY = 25f;
     public static final float SIMPLE_ENEMY_RADIUS = 15f;
