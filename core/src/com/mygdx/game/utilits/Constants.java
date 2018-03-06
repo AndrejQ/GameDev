@@ -21,8 +21,8 @@ public class Constants {
     public static final float ENEMY_DISPOSE_DISTANCE = WORLD_SIZE * 2;
 
     //Background
-    public static final float BACKGROUND_CELL_SIZE = 20f;
-    public static final int BACKGROUND_CHUNK_SIZE = 2;
+    public static final float BACKGROUND_CELL_SIZE = 25f;
+    public static final int BACKGROUND_CHUNK_SIZE = 8;
 
 
     //simple enemy

@@ -1,5 +1,6 @@
 package com.mygdx.game.utilits;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -34,5 +35,23 @@ public class Utils {
             number *= num;
         }
         return number;
+    }
+
+    public static Color randomColor(){
+        switch (MathUtils.random(0, 5)){
+            case 0:
+                return Color.FIREBRICK;
+            case 1:
+                return Color.DARK_GRAY;
+            case 2:
+                return Color.FOREST;
+            case 3:
+                return Color.TEAL;
+            case 4:
+                return Color.ROYAL;
+            case 5:
+                return Color.BROWN;
+        }
+        return null;
     }
 }

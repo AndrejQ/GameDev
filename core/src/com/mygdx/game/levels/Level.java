@@ -41,9 +41,9 @@ public class Level {
 
     public void render(SpriteBatch batch, ShapeRenderer renderer){
         background.render(renderer);
+        particleManager.render(batch, renderer);
         gg.render(batch, renderer);
         enemiesManager.render(batch, renderer);
         missilesManager.render(batch, renderer);
-        particleManager.render(batch, renderer);
     }
 }

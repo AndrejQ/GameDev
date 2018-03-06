@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.utilits.Constants;
+import com.mygdx.game.utilits.Utils;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class Background {
     public Background(int layersNumber) {
         layers = new Layer[layersNumber];
         for (int i = 0; i < layersNumber; i++) {
-            layers[i] = new Layer(0, Color.GRAY);
+            layers[i] = new Layer(0, Utils.randomColor());
         }
     }
 
@@ -40,7 +41,7 @@ public class Background {
     private class Layer {
         float depth;
         Color colorTheme;
-        Array<Chunk> chunks;
+        Array<Chunk> allChunks;
         Chunk[] active9Chunks;  // 0 1 2
                                 // 3 4 5
                                 // 6 7 8
@@ -48,6 +49,7 @@ public class Background {
         public Layer(float depth, Color colorTheme) {
             this.colorTheme = colorTheme;
             active9Chunks = new Chunk[9];
+
             active9Chunks[0] = new Chunk(-1, 1, Constants.BACKGROUND_CHUNK_SIZE);
             active9Chunks[1] = new Chunk(0, 1, Constants.BACKGROUND_CHUNK_SIZE);
             active9Chunks[2] = new Chunk(1, 1, Constants.BACKGROUND_CHUNK_SIZE);
@@ -57,6 +59,7 @@ public class Background {
             active9Chunks[6] = new Chunk(-1, -1, Constants.BACKGROUND_CHUNK_SIZE);
             active9Chunks[7] = new Chunk(0, -1, Constants.BACKGROUND_CHUNK_SIZE);
             active9Chunks[8] = new Chunk(1, -1, Constants.BACKGROUND_CHUNK_SIZE);
+            allChunks = new Array<Chunk>(active9Chunks);
             this.depth = depth;
         }
 
@@ -95,13 +98,24 @@ public class Background {
 
         // shiftX right == 1, left == -1, shiftY up == 1, down == -1
         private Chunk[] shift(Chunk[] active9Chunks, int shiftX, int shiftY){
-            Chunk[] newCunks = new Chunk[9];
+            Chunk[] newChunks = new Chunk[9];
             for (int i = 0; i < 9; i++) {
-                newCunks[i] = new Chunk(active9Chunks[i].xOrder + shiftX,
-                        active9Chunks[i].yOrder + shiftY,
-                        active9Chunks[i].chunkSize);
+//                newChunks[i] = new Chunk(active9Chunks[i].xOrder + shiftX,
+//                        active9Chunks[i].yOrder + shiftY,
+//                        active9Chunks[i].chunkSize);
+                newChunks[i] = uploadChunk(active9Chunks[i].xOrder + shiftX,
+                        active9Chunks[i].yOrder + shiftY);
             }
-            return newCunks;
+            return newChunks;
+        }
+
+        private Chunk uploadChunk(int xOrder, int yOrder){
+            for (Chunk chunk : allChunks){
+                if (chunk.xOrder == xOrder && chunk.yOrder == yOrder) return chunk;
+            }
+            Chunk newChunk = new Chunk(xOrder, yOrder, active9Chunks[0].chunkSize);
+            allChunks.add(newChunk);
+            return newChunk;
         }
 
         private void render(ShapeRenderer renderer){
@@ -155,9 +169,9 @@ public class Background {
             private Cell(Vector2 position, float size, Color color) {
                 this.position = position;
                 this.size = size;
-                this.color = new Color(Math.min(color.r + MathUtils.random() / 20, 1),
-                        Math.min(color.g + MathUtils.random() / 20, 1),
-                        Math.min(color.b + MathUtils.random() / 20, 1),
+                this.color = new Color(Math.min(color.r + MathUtils.random(-1f, 1f) / 30, 1),
+                        Math.min(color.g + MathUtils.random(-1f, 1f) / 30, 1),
+                        Math.min(color.b + MathUtils.random(-1f, 1f) / 30, 1),
                         color.a);
             }
 
