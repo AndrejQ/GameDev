@@ -26,8 +26,8 @@ public class Light extends Particle {
 
     @Override
     public void render(SpriteBatch batch, ShapeRenderer renderer) {
-        batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_ALPHA);
-        batch.draw(Assets.instance.lightAssets.lihgt, position.x - radius, position.y - radius, 2*radius, 2*radius);
-        batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+//        batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_ALPHA);
+//        batch.draw(Assets.instance.lightAssets.lihgt, position.x - radius, position.y - radius, 2*radius, 2*radius);
+//        batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     }
 }

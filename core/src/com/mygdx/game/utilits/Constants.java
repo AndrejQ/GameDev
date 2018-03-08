@@ -21,8 +21,8 @@ public class Constants {
     public static final float ENEMY_DISPOSE_DISTANCE = WORLD_SIZE * 2;
 
     //Background
-    public static final float BACKGROUND_CELL_SIZE = 25f;
-    public static final int BACKGROUND_CHUNK_SIZE = 8;
+    public static final float BACKGROUND_CELL_SIZE = 60f;
+    public static final int BACKGROUND_CHUNK_SIZE = 3;
 
 
     //simple enemy
@@ -34,7 +34,7 @@ public class Constants {
     public static final float SIMPLE_ENEMY_MASS = 10f;
 
     //Light missile
-    public static final float LIGHT_MISSILE_MASS = 0.5f;
+    public static final float LIGHT_MISSILE_MASS = 0.7f;
     public static final float LIGHT_MISSILE_DAMAGE = 2f;
     public static final float LIGHT_MISSILE_VELOCITY = 100f;
     public static final float LIGHT_MISSILE_LIFETIME = 2f;

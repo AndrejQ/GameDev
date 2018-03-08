@@ -30,6 +30,7 @@ public class Utils {
     }
 
     public static float pow(float num, int power){
+        if (power == 0) return 1;
         float number = num;
         for (int i = 0; i < power - 1; i++) {
             number *= num;
@@ -40,7 +41,7 @@ public class Utils {
     public static Color randomColor(){
         switch (MathUtils.random(0, 5)){
             case 0:
-                return Color.FIREBRICK;
+                return Color.OLIVE;
             case 1:
                 return Color.DARK_GRAY;
             case 2:
@@ -53,5 +54,9 @@ public class Utils {
                 return Color.BROWN;
         }
         return null;
+    }
+
+    public static boolean randomBoolean(float truePercentage){
+        return truePercentage < MathUtils.random();
     }
 }

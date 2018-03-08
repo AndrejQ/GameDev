@@ -27,6 +27,7 @@ public class GG extends GameObject{
 
     public GG(Vector2 position, Vector2 velocity, Level level) {
         super(position, velocity, level);
+        setMass(Constants.GG_MASS);
         radius = Constants.GG_RADIUS;
     }
 
@@ -48,10 +49,10 @@ public class GG extends GameObject{
         }
 
         // stars spawn
-        if (Utils.timeElapsed(startTimeForStars) > 1 / Constants.STAR_GENERATE_PER_SECOND){
-            generateStar();
-            startTimeForStars = TimeUtils.nanoTime();
-        }
+//        if (Utils.timeElapsed(startTimeForStars) > 1 / Constants.STAR_GENERATE_PER_SECOND){
+//            generateStar();
+//            startTimeForStars = TimeUtils.nanoTime();
+//        }
     }
 
 

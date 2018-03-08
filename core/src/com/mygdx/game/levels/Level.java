@@ -17,7 +17,6 @@ import com.mygdx.game.entities.particles.ParticleManager;
 public class Level {
 
     public GG gg;
-    public Background background;
     public EnemiesManager enemiesManager;
     public MissilesManager missilesManager;
     public ParticleManager particleManager;
@@ -28,7 +27,6 @@ public class Level {
         // TODO: 25.12.2017 make gg = new GG(!!without this!!) make environmentManager where use generateStars() method (remove it from gg)
         gg = new GG(new Vector2(10, 10), new Vector2(), this);
         enemiesManager = new EnemiesManager(gg);
-        background = new Background(1);
     }
 
     public void update(float delta){
@@ -36,11 +34,9 @@ public class Level {
         enemiesManager.update(delta);
         missilesManager.update(delta);
         particleManager.update(delta);
-        background.update(gg.position);
     }
 
     public void render(SpriteBatch batch, ShapeRenderer renderer){
-        background.render(renderer);
         particleManager.render(batch, renderer);
         gg.render(batch, renderer);
         enemiesManager.render(batch, renderer);

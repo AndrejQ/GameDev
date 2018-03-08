@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.controller.GameScreenControls;
+import com.mygdx.game.entities.background.Background;
 import com.mygdx.game.entities.particles.Light;
 import com.mygdx.game.utilits.Assets;
 import com.mygdx.game.utilits.ChaseCam;
@@ -38,6 +39,8 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     private GameScreenControls controls;
     private ChaseCam chaseCam;
     private ColorAction colorAction;
+    public Background background;
+
 
     private HudFPS hudFPS;
 
@@ -52,6 +55,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
 
         batch = new SpriteBatch();
         level = new Level();
+        background = new Background(3);
         batch = new SpriteBatch();
         renderer = new ShapeRenderer();
         viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
@@ -71,6 +75,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     public void render(float delta) {
         chaseCam.update(delta);
         level.update(delta);
+        background.update(new Vector2(chaseCam.getCamera().position.x, chaseCam.getCamera().position.y));
 
         viewport.apply();
         Gdx.gl.glClearColor(Params.background_color.r, Params.background_color.g, Params.background_color.b, 1);
@@ -80,6 +85,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         renderer.setAutoShapeType(true);
         batch.begin();
         renderer.begin();
+        background.render(renderer);
         level.render(batch, renderer);
         batch.end();
         renderer.end();

@@ -1,10 +1,12 @@
 package com.mygdx.game.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.entities.background.Background;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.utilits.Utils;
