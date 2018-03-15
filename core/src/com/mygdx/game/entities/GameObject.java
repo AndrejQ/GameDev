@@ -48,7 +48,7 @@ public abstract class GameObject {
 
     public void render(SpriteBatch batch, ShapeRenderer renderer){
         //TODO: Don't forget to change ShapeRenderer to SpriteBatch
-        renderer.setColor(Color.LIGHT_GRAY);
+        renderer.setColor(Color.GRAY);
         renderer.set(ShapeRenderer.ShapeType.Filled);
         renderer.circle(position.x, position.y, radius, 20);
     }

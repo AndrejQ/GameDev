@@ -11,7 +11,7 @@ public class Constants {
 
     public static final float WORLD_SIZE = 200;
     public static final float FRICTION = 0.02f;
-    public static final Color BACKGROUND_COLOR = new Color(0, 0, 0.3f, 1);
+    public static final Color BACKGROUND_COLOR = Color.BLACK;
     public static final Rectangle WORLD_BOUNDS = new Rectangle(0, 0, 1.8f * WORLD_SIZE, WORLD_SIZE);
 
     //GG
@@ -19,6 +19,7 @@ public class Constants {
     public static final float GG_MASS = 5f;
     public static final float WEAPON_SPRAY = 20f;
     public static final float ENEMY_DISPOSE_DISTANCE = WORLD_SIZE * 2;
+    public static final Color GG_COLOR = Color.GOLD;
 
     //Background
     public static final float BACKGROUND_CELL_SIZE = 60f;
@@ -32,6 +33,8 @@ public class Constants {
     public static final float SIMPLE_ENEMY_TIME_BETWEEN_ADDING = 0.5f;
     public static final float SIMPLE_ENEMY_SPAWN_RATE_PER_SECOND = 0.2f;
     public static final float SIMPLE_ENEMY_MASS = 10f;
+    public static final Color SIMPLE_ENEMY_COLOR = Color.BLACK;
+
 
     //Light missile
     public static final float LIGHT_MISSILE_MASS = 0.7f;

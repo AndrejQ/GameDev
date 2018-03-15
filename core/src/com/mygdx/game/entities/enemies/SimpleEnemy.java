@@ -1,6 +1,9 @@
 package com.mygdx.game.entities.enemies;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -17,6 +20,7 @@ public class SimpleEnemy extends Enemy {
 
     private long startTime;
     private float timeBetweenAdding = Constants.SIMPLE_ENEMY_TIME_BETWEEN_ADDING;
+    private Color color;
 
     public SimpleEnemy(Vector2 position, Level level){
         this(position, new Vector2(), level);
@@ -28,6 +32,7 @@ public class SimpleEnemy extends Enemy {
         health = Constants.SIMPLE_ENEMY_HEALTH;
         setMass(Constants.SIMPLE_ENEMY_MASS);
         startTime = TimeUtils.nanoTime();
+        color = new Color(Constants.SIMPLE_ENEMY_COLOR);
     }
 
     @Override
@@ -42,6 +47,20 @@ public class SimpleEnemy extends Enemy {
     }
 
     @Override
+    public void render(SpriteBatch batch, ShapeRenderer renderer) {
+        int segments = 20;
+        for (int i = segments; i > 10; i = i - 5) {
+            renderer.setColor(
+                    color.r + (float)(segments - i) / segments,
+                    color.g,
+                    color.b,
+                    color.a
+            );
+            renderer.circle(position.x, position.y, radius * (float)i / segments, i);
+        }
+    }
+
+    @Override
     void velocityUpdate(){
         velocity.add(MathUtils.random(-Constants.SIMPLE_ENEMY_ADD_VELOCITY, Constants.SIMPLE_ENEMY_ADD_VELOCITY),
                 MathUtils.random(-Constants.SIMPLE_ENEMY_ADD_VELOCITY, Constants.SIMPLE_ENEMY_ADD_VELOCITY))
@@ -51,6 +70,10 @@ public class SimpleEnemy extends Enemy {
     @Override
     public void missileCatch(Missile missile) {
         health -= missile.damage;
+
+        // reaction of enemy
+        color.r += 0.03f;
+        timeBetweenAdding /= 1.228;
 
         Vector2 direction = new Vector2(missile.position.x - position.x, missile.position.y - position.y).nor();
         //sparkling after damage

@@ -4,6 +4,7 @@
 
     <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="25" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -20,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="0d1c006232087f5767f82fe776b7cba8af29fae0" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

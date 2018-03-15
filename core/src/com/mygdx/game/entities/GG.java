@@ -37,7 +37,7 @@ public class GG extends GameObject{
 
     @Override
     public void update(float delta) {
-        velocity.mulAdd(velocity, -Constants.FRICTION); // air friction
+        velocity.mulAdd(velocity, -Constants.FRICTION * 60 * delta); // air friction
         super.update(delta);
 
         // light missile spawn
@@ -59,7 +59,8 @@ public class GG extends GameObject{
     @Override
     public void render(SpriteBatch batch, ShapeRenderer renderer) {
         renderer.set(ShapeRenderer.ShapeType.Filled);
-        super.render(batch, renderer);
+        renderer.setColor(Constants.GG_COLOR);
+        renderer.circle(position.x, position.y, radius, 20);
     }
 
 

@@ -19,7 +19,7 @@ public class Background {
     public Background(int layersNumber) {
         layers = new Layer[layersNumber];
         for (int i = 0; i < layersNumber; i++) {
-            layers[i] = new Layer(10 * i, Utils.randomColor());
+            layers[i] = new Layer(i, Utils.shadesOfColor(Color.LIGHT_GRAY, layersNumber - i, layersNumber));
         }
     }
 
@@ -41,6 +41,7 @@ public class Background {
 
     private class Layer {
         Vector2 cameraPositionParallax;
+        int layerIndex;
         float depth;
         float depthChunkSize;
         Color colorTheme;
@@ -49,10 +50,11 @@ public class Background {
                                 // 3 4 5
                                 // 6 7 8
 
-        public Layer(float depth, Color colorTheme) {
+        public Layer(int layerIndex, Color colorTheme) {
             this.colorTheme = colorTheme;
             active9Chunks = new Chunk[9];
             cameraPositionParallax = new Vector2();
+            depth = 10 * layerIndex;
 
             // depthChunkSize grows up with depth
             depthChunkSize = Utils.pow(Constants.BACKGROUND_CHUNK_SIZE, (int) depth / 5);
@@ -68,7 +70,6 @@ public class Background {
             active9Chunks[7] = new Chunk(0, -1, (int) depthChunkSize);
             active9Chunks[8] = new Chunk(1, -1, (int) depthChunkSize);
             allChunks = new Array<Chunk>(active9Chunks);
-            this.depth = depth;
         }
 
         private void update(Vector2 cameraPosition){
@@ -144,7 +145,6 @@ public class Background {
 
             // chunkSize -> number of cells in one dimension
             public Chunk(int xOrder, int yOrder, int chunkSize) {
-                Gdx.app.log("cell", depthChunkSize + " " + cellSize);
                 this.xOrder = xOrder;
                 this.yOrder = yOrder;
                 this.chunkSize = chunkSize;
@@ -184,9 +184,10 @@ public class Background {
                 this.isTransparent = isTransparent;
                 this.position = position;
                 this.size = size;
-                this.color = new Color(Math.min(color.r + MathUtils.random(-1f, 1f) / 30, 1),
-                        Math.min(color.g + MathUtils.random(-1f, 1f) / 30, 1),
-                        Math.min(color.b + MathUtils.random(-1f, 1f) / 30, 1),
+                float colorRandomness = MathUtils.random(-1f, 1f) / 30;
+                this.color = new Color(color.r + colorRandomness,
+                        color.g + colorRandomness,
+                        color.b + colorRandomness,
                         color.a);
             }
 

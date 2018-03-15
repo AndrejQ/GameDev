@@ -56,6 +56,15 @@ public class Utils {
         return null;
     }
 
+    // example: shadesOfColor(white, 1, 50) will return 1/50 of white (almost black)
+    public static Color shadesOfColor(Color colorTheme, int shadeOrder, int numberOfShades){
+        float r = colorTheme.r * shadeOrder / numberOfShades;
+        float g = colorTheme.g * shadeOrder / numberOfShades;
+        float b = colorTheme.b * shadeOrder / numberOfShades;
+        float a = colorTheme.a;
+        return new Color(r, g, b, a);
+    }
+
     public static boolean randomBoolean(float truePercentage){
         return truePercentage < MathUtils.random();
     }
