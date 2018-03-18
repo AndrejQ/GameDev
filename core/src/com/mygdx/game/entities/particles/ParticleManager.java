@@ -28,24 +28,11 @@ public class ParticleManager {
                 particles.removeValue(particle, false);
             }
         }
-
-        for (Star star : stars) {
-            star.update(delta);
-        }
     }
 
     public void render(SpriteBatch batch, ShapeRenderer renderer) {
-
         for (Particle particle : particles) {
             particle.render(batch, renderer);
         }
-        for (Star star : stars) {
-            star.render(batch, renderer);
-            //removing elapsed stars
-            if (star.isTimeElapsed()){
-                stars.removeValue(star, false);
-            }
-        }
-
     }
 }

@@ -24,6 +24,7 @@ import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.entities.missiles.LightMissile;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Params;
+import com.mygdx.game.utilits.Utils;
 
 /**
  * Created by Asus123 on 12.12.2017.
@@ -97,6 +98,8 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     public void resize(int width, int height) {
         hudFPS.viewport.update(width, height, true);
         viewport.update(width, height, true);
+
+        Utils.aspect_ratio = width / height;
 
         //set camera position centered to gg when resized
         chaseCam.getCamera().position.x = level.gg.position.x;

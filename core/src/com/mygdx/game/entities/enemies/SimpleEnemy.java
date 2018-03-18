@@ -1,6 +1,5 @@
 package com.mygdx.game.entities.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -72,8 +71,9 @@ public class SimpleEnemy extends Enemy {
         health -= missile.damage;
 
         // reaction of enemy
-        color.r += 0.03f;
-        timeBetweenAdding /= 1.228;
+        color.r = 0.5f - 0.5f * health / Constants.SIMPLE_ENEMY_HEALTH;
+        timeBetweenAdding = 0.05f + Constants.SIMPLE_ENEMY_TIME_BETWEEN_ADDING *
+                health / Constants.SIMPLE_ENEMY_HEALTH;
 
         Vector2 direction = new Vector2(missile.position.x - position.x, missile.position.y - position.y).nor();
         //sparkling after damage

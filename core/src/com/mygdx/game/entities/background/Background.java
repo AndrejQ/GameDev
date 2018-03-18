@@ -1,6 +1,5 @@
 package com.mygdx.game.entities.background;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -19,7 +18,8 @@ public class Background {
     public Background(int layersNumber) {
         layers = new Layer[layersNumber];
         for (int i = 0; i < layersNumber; i++) {
-            layers[i] = new Layer(i, Utils.shadesOfColor(Color.LIGHT_GRAY, layersNumber - i, layersNumber));
+            // TODO: 18.03.2018 config color: gray || colored
+            layers[i] = new Layer(i, Utils.shadesOfColor(Utils.randomColor(), layersNumber - i, layersNumber));
         }
     }
 

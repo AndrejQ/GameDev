@@ -19,12 +19,18 @@ public abstract class Missile extends GameObject {
 
     public float damage;
     protected float lifetime;
+    Vector2 previousPosition;
 
     public Missile(Vector2 position, Vector2 velocity, Level level) {
         super(position, velocity, level);
+        previousPosition = new Vector2(position);
     }
 
-
+    @Override
+    public void update(float delta) {
+        previousPosition = new Vector2(position);
+        super.update(delta);
+    }
 //    public Missile(Vector2 position, Vector2 velocity, Level level){
 //        this.position = position;
 //        this.velocity = velocity;

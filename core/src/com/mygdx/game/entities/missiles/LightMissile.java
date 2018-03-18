@@ -1,6 +1,5 @@
 package com.mygdx.game.entities.missiles;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -10,11 +9,10 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.entities.enemies.Enemy;
 import com.mygdx.game.entities.particles.Light;
 import com.mygdx.game.entities.particles.SparkleParticle;
+import com.mygdx.game.entities.particles.TriangleParticle;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.utilits.Utils;
-
-import static com.mygdx.game.utilits.Utils.timeElapsed;
 
 /**
  * Created by Asus123 on 15.12.2017.
@@ -80,6 +78,20 @@ public class LightMissile extends Missile {
     @Override
     public void update(float delta) {
         super.update(delta);
+
+        triangleParticleTrace();
+    }
+
+    private void triangleParticleTrace(){
+        Vector2[] positions = Utils.pointsOnLineWithDensity(position, previousPosition,
+                Constants.TRIANGLE_PARTICLE_DENSITY);
+
+        // cycles for making appropriate array of sparkles
+        TriangleParticle[] triangleParticles = new TriangleParticle[positions.length];
+        for (int i = 0; i < positions.length; i++) {
+            triangleParticles[i] = new TriangleParticle(positions[i], new Vector2(), level);
+        }
+        sparkleTrace(triangleParticles);
     }
 
     @Override

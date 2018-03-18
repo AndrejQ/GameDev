@@ -1,5 +1,6 @@
 package com.mygdx.game.utilits;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.utils.TimeUtils;
  */
 
 public class Utils {
+
+    public static float aspect_ratio;
 
     public static float timeElapsed(long startTime) {
         return MathUtils.nanoToSec * (TimeUtils.nanoTime() - startTime);
@@ -67,5 +70,36 @@ public class Utils {
 
     public static boolean randomBoolean(float truePercentage){
         return truePercentage < MathUtils.random();
+    }
+
+    public static Vector2[] pointsOnLine(Vector2 begin, Vector2 end, int numberOfPoints){
+        Vector2[] points = new Vector2[numberOfPoints];
+        for (int i = 0; i < numberOfPoints; i++) {
+            points[i] = new Vector2(
+                    begin.x + i * (end.x - begin.x) / numberOfPoints,
+                    begin.y + i * (end.y - begin.y) / numberOfPoints
+            );
+        }
+        return points;
+    }
+
+    public static Vector2[] pointsOnLineWithDensity(Vector2 begin, Vector2 end, float density) {
+        float lineLength2 = begin.dst2(end) * (density * density); // density ** 2 for normalization condition
+
+        if (lineLength2 < 1){
+
+            // check if we have short line
+            return Utils.pow2(MathUtils.random()) < lineLength2 - (int) lineLength2 ?
+                    pointsOnLine(begin, end, 1) :
+                    pointsOnLine(begin, end, 0);
+        } else {
+//            Gdx.app.log("", "dsvds" + (int) (lineLength2 * density * density));
+            return pointsOnLine(begin, end, (int) Math.sqrt(lineLength2));
+        }
+    }
+
+    public static boolean outOfScreen(Vector2 targetPosition, Vector2 centerPosition){
+        return Math.abs(targetPosition.x - centerPosition.x) > aspect_ratio * Constants.WORLD_SIZE ||
+        Math.abs(targetPosition.y - centerPosition.y) > Constants.WORLD_SIZE;
     }
 }

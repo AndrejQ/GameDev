@@ -37,13 +37,13 @@ public class Constants {
 
 
     //Light missile
-    public static final float LIGHT_MISSILE_MASS = 0.7f;
-    public static final float LIGHT_MISSILE_DAMAGE = 2f;
+    public static final float LIGHT_MISSILE_MASS = 1.7f;
+    public static final float LIGHT_MISSILE_DAMAGE = 5f;
     public static final float LIGHT_MISSILE_VELOCITY = 100f;
-    public static final float LIGHT_MISSILE_LIFETIME = 2f;
-    public static final float LIGHT_MISSILE_SPAWN_PER_SECOND = 8f;
-    public static final float LIGHT_MISSILE_LENGTH = 4f;
-    public static final float LIGHT_MISSILE_WIDTH = 4f;
+    public static final float LIGHT_MISSILE_LIFETIME = 1f;
+    public static final float LIGHT_MISSILE_SPAWN_PER_SECOND = 5f;
+    public static final float LIGHT_MISSILE_LENGTH = 6f;
+    public static final float LIGHT_MISSILE_WIDTH = 6f;
     public static final float LIGHT_MISSILE_WOBBLE_FREQUENCY = 30f;
 //    public static final float LIGHT_MISSILE_AERODYNAMICS= 0.5f; //0..1
 
@@ -53,6 +53,14 @@ public class Constants {
     public static final float SPARKLE_PARTICLE_FRICTION = 0.1f;
     public static final int SPARKLE_PARTICLE_NUMBER = 10;
     public static final float SPARKLE_PARTICLE_START_VELOCITY = 100f;
+
+    //Triangle particle
+    public static final float TRIANGLE_PARTICLE_LIFE_TIME = 0.3f;
+    public static final float TRIANGLE_PARTICLE_SIZE = 6f;
+    public static final float TRIANGLE_PARTICLE_FRICTION = 0.1f;
+    public static final float TRIANGLE_PARTICLE_DENSITY = 0.5f;
+    public static final float TRIANGLE_PARTICLE_START_VELOCITY = 0;
+
 
     // light
     public static final float LIGHT_RADIUS = 3 * LIGHT_MISSILE_LENGTH;

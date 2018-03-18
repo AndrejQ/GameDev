@@ -18,6 +18,10 @@ public abstract class Particle extends GameObject {
     // Enemy with explosion (particles)
     private Enemy mHostEnemy;
 
+    public Particle(Particle particle){
+        this(particle.position, particle.velocity, particle.level);
+    }
+
     public Particle(Vector2 position, Vector2 velocity, Level level) {
         super(position, velocity, level);
         this.startTime = TimeUtils.nanoTime();
@@ -29,7 +33,7 @@ public abstract class Particle extends GameObject {
     }
 
     public boolean isTimeElapsed(){
-        return Utils.timeElapsed(startTime) > lifeTime;
+        return Utils.timeElapsed(startTime) > lifeTime || Utils.outOfScreen(position, level.gg.position);
     }
 
     @Override
@@ -46,7 +50,6 @@ public abstract class Particle extends GameObject {
     }
 
     public float getLifeTime() {
-
         return lifeTime;
     }
 }
