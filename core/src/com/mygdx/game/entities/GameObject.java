@@ -31,7 +31,7 @@ public abstract class GameObject {
     }
 
     public void update(float delta) {
-        position.mulAdd(velocity, delta * 60 * delta);
+        position.mulAdd(velocity, delta);
 
 //        //Bounds collision
 //        if (position.x < Constants.WORLD_BOUNDS.x + radius) {

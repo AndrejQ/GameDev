@@ -32,14 +32,14 @@ public class ChaseCam {
         // reacting for accelerometer
         camera.position.x += xAccelerometer;
         camera.position.y -= yAccelerometer;
-        float yAccelerometerNew = 5 * Gdx.input.getAccelerometerX();
-        float xAccelerometerNew = 5 * Gdx.input.getAccelerometerY();
+        float yAccelerometerNew = 2 * Gdx.input.getAccelerometerX();
+        float xAccelerometerNew = 2 * Gdx.input.getAccelerometerY();
         // smoothing
-        float eps = 0.2f;
+        float eps = 0.1f;
         if (Math.abs(xAccelerometerNew - xAccelerometer) > eps ||
                 Math.abs(yAccelerometerNew - yAccelerometer) > eps){
-            xAccelerometer = xAccelerometerNew * eps;
-            yAccelerometer = yAccelerometerNew * eps;
+            xAccelerometer += xAccelerometerNew * eps / 3;
+            yAccelerometer += yAccelerometerNew * eps / 3;
         } else {
             xAccelerometer = xAccelerometerNew;
             yAccelerometer = yAccelerometerNew;

@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.particles;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -17,8 +18,8 @@ public class TriangleParticle extends Particle {
     private ColorChanger colorChanger;
 
     //points of triangle (position, point2, point3)
-    private Vector2 point2;
-    private Vector2 point3;
+    private Vector2 point2, newPoint2;
+    private Vector2 point3, newPoint3;
 
     public TriangleParticle(Vector2 position, Vector2 velocity, Level level) {
         super(Utils.randomVector(Constants.TRIANGLE_PARTICLE_SIZE).add(position), velocity, level);
@@ -37,14 +38,18 @@ public class TriangleParticle extends Particle {
     @Override
     public void update(float delta) {
         colorChanger.act(delta);
-        point2.add(new Vector2(position).add(new Vector2(point2).scl(-1)).scl(0.07f));
-        point3.add(new Vector2(position).add(new Vector2(point3).scl(-1)).scl(0.05f));
+        newPoint2 = new Vector2(point2);
+        newPoint3 = new Vector2(point3);
+        newPoint2.add(new Vector2(position).add(new Vector2(point2).scl(-1)).scl(Utils.timeElapsed(startTime) / getLifeTime()));
+        newPoint3.add(new Vector2(position).add(new Vector2(point3).scl(-1)).scl(Utils.timeElapsed(startTime) / getLifeTime()));
     }
 
     @Override
     public void render(SpriteBatch batch, ShapeRenderer renderer) {
+        // TODO: 20.03.2018 fix the crutch. newPoint 2 and 3 sometimes become null.
+        if (newPoint3 == null || newPoint2 == null) return;
         renderer.set(ShapeRenderer.ShapeType.Filled);
         renderer.setColor(colorChanger.getColor());
-        renderer.triangle(position.x, position.y, point2.x, point2.y, point3.x, point3.y);
+        renderer.triangle(position.x, position.y, newPoint2.x, newPoint2.y, newPoint3.x, newPoint3.y);
     }
 }
