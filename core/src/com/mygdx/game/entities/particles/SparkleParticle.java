@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entities.enemies.Enemy;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
+import com.mygdx.game.utilits.Utils;
 
 /**
  * Created by Asus123 on 19.12.2017.
@@ -47,6 +48,8 @@ public class SparkleParticle extends Particle {
     @Override
     public void update(float delta) {
         velocity.mulAdd(velocity, -Constants.SPARKLE_PARTICLE_FRICTION); // air friction
+        // decreasing size
+        size = Constants.SPARKLE_PARTICLE_SIZE * (1 - Utils.timeElapsed(startTime) / getLifeTime());
         super.update(delta);
     }
 }

@@ -49,7 +49,7 @@ public class Constants {
 
     // Sparkle particle
     public static final float SPARKLE_PARTICLE_LIFE_TIME = 0.3f;
-    public static final float SPARKLE_PARTICLE_SIZE = 2f;
+    public static final float SPARKLE_PARTICLE_SIZE = 4f;
     public static final float SPARKLE_PARTICLE_FRICTION = 0.1f;
     public static final int SPARKLE_PARTICLE_NUMBER = 10;
     public static final float SPARKLE_PARTICLE_START_VELOCITY = 100f;

@@ -71,9 +71,9 @@ public class SimpleEnemy extends Enemy {
         health -= missile.damage;
 
         // reaction of enemy
-        color.r = 0.5f - 0.5f * health / Constants.SIMPLE_ENEMY_HEALTH;
-        timeBetweenAdding = 0.05f + Constants.SIMPLE_ENEMY_TIME_BETWEEN_ADDING *
-                health / Constants.SIMPLE_ENEMY_HEALTH;
+        color.r = 0.6f - 0.5f * health / Constants.SIMPLE_ENEMY_HEALTH;
+        timeBetweenAdding = Constants.SIMPLE_ENEMY_TIME_BETWEEN_ADDING * 1 /
+                (0.5f * (Constants.SIMPLE_ENEMY_HEALTH - health) + 1);
 
         Vector2 direction = new Vector2(missile.position.x - position.x, missile.position.y - position.y).nor();
         //sparkling after damage

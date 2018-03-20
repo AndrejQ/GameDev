@@ -1,5 +1,6 @@
 package com.mygdx.game.utilits;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
 import com.badlogic.gdx.utils.Array;
@@ -20,6 +21,7 @@ public class ColorChanger{
     public ColorChanger() {
         colorStatesArray = new ArrayList<Color>();
         colorAction = new ColorAction();
+        index = -1; // crutch. For some reason indexes starts from 1 (not from 0).
     }
 
     public boolean act(float delta) {

@@ -45,10 +45,10 @@ public class MenuScreen extends InputAdapter implements Screen {
 
         colorChanger = new ColorChanger();
         colorChanger.setAllColorsDuration(10);
-        colorChanger.addColorState(new Color(Color.RED));
-        colorChanger.addColorState(new Color(Color.BROWN));
-        colorChanger.addColorState(new Color(Color.MAROON));
-        colorChanger.addColorState(new Color(Color.FIREBRICK));
+        colorChanger.addColorState(Color.RED);
+        colorChanger.addColorState(Color.BROWN);
+        colorChanger.addColorState(Color.MAROON);
+        colorChanger.addColorState(Color.FIREBRICK);
 
         viewport = new ExtendViewport(3 * Constants.WORLD_SIZE, 3 * Constants.WORLD_SIZE);
         font = new BitmapFont();

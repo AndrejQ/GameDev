@@ -30,9 +30,9 @@ public class TriangleParticle extends Particle {
 
         colorChanger = new ColorChanger();
         colorChanger.setAllColorsDuration(getLifeTime());
-//        colorChanger.addColorState(Color.RED);
-        colorChanger.addColorState(Color.YELLOW);
         colorChanger.addColorState(Color.WHITE);
+        colorChanger.addColorState(Color.YELLOW);
+        colorChanger.addColorState(Color.ORANGE);
     }
 
     @Override
