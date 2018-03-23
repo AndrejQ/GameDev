@@ -5,23 +5,19 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.controller.GameScreenControls;
 import com.mygdx.game.entities.background.Background;
-import com.mygdx.game.entities.particles.Light;
 import com.mygdx.game.utilits.Assets;
 import com.mygdx.game.utilits.ChaseCam;
 import com.mygdx.game.utilits.Constants;
-import com.mygdx.game.entities.missiles.LightMissile;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Params;
 import com.mygdx.game.utilits.Utils;
@@ -41,7 +37,6 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     private ChaseCam chaseCam;
     private ColorAction colorAction;
     public Background background;
-
 
     private HudFPS hudFPS;
 
@@ -76,6 +71,9 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     public void render(float delta) {
         chaseCam.update(delta);
         level.update(delta);
+        level.setInstantCameraPosition(chaseCam.getCamera().position.x,
+                chaseCam.getCamera().position.y);
+
         background.update(new Vector2(chaseCam.getCamera().position.x, chaseCam.getCamera().position.y));
 
         viewport.apply();
@@ -158,7 +156,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.BACK){
-            game.setMenueScreen();
+            game.setMenuScreen();
         }
         return false;
     }

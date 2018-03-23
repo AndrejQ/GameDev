@@ -28,6 +28,15 @@ public class Utils {
         return vector;
     }
 
+    public static Vector2 randomRoundVector(float radius){
+        Vector2 vector = Utils.randomVector(-radius, radius);
+        while (vector.x * vector.x + vector.y * vector.y > radius * radius){
+            vector = Utils.randomVector(-radius, radius);
+        }
+        return vector;
+    }
+
+
     public static float pow2(float num){
         return pow(num, 2);
     }
@@ -98,8 +107,8 @@ public class Utils {
         }
     }
 
-    public static boolean outOfScreen(Vector2 targetPosition, Vector2 centerPosition){
-        return Math.abs(targetPosition.x - centerPosition.x) > aspect_ratio * Constants.WORLD_SIZE ||
-        Math.abs(targetPosition.y - centerPosition.y) > Constants.WORLD_SIZE;
+    public static boolean outOfScreen(Vector2 targetPosition, Vector2 centerPosition, float raidus){
+        return Math.abs(targetPosition.x - centerPosition.x) - raidus > aspect_ratio * Constants.WORLD_SIZE ||
+        Math.abs(targetPosition.y - centerPosition.y) - raidus > Constants.WORLD_SIZE;
     }
 }

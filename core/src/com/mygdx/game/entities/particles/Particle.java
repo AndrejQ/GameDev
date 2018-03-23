@@ -33,7 +33,8 @@ public abstract class Particle extends GameObject {
     }
 
     public boolean isTimeElapsed(){
-        return Utils.timeElapsed(startTime) > lifeTime || Utils.outOfScreen(position, level.gg.position);
+//        return Utils.timeElapsed(startTime) > lifeTime || Utils.outOfScreen(position, level.gg.position, 0);
+        return Utils.timeElapsed(startTime) > lifeTime || Utils.outOfScreen(position, level.getInstantCameraPosition(), 0);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -8,12 +9,17 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.levels.Level;
+import com.mygdx.game.levels.MenuLevel;
+import com.mygdx.game.utilits.ChaseCam;
 import com.mygdx.game.utilits.ColorChanger;
 import com.mygdx.game.utilits.Constants;
+import com.mygdx.game.utilits.Utils;
 
 /**
  * Created by Asus123 on 14.12.2017.
@@ -22,9 +28,12 @@ import com.mygdx.game.utilits.Constants;
 public class MenuScreen extends InputAdapter implements Screen {
 
     MyGame game;
-
+    MenuLevel menuLevel;
     Viewport viewport;
+    HudMenu hudMenu;
     SpriteBatch batch;
+    ShapeRenderer renderer;
+    ChaseCam chaseCam;
     BitmapFont font;
     private ColorChanger colorChanger;
 
@@ -35,30 +44,30 @@ public class MenuScreen extends InputAdapter implements Screen {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         game.setGamePlayScreen();
-
         return true;
     }
 
     @Override
     public void show() {
         batch = new SpriteBatch();
+        renderer = new ShapeRenderer();
+        viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
+        hudMenu = new HudMenu();
+        menuLevel = new MenuLevel();
+        chaseCam = new ChaseCam(viewport.getCamera(), menuLevel.gg);
+        chaseCam.fixChase(true);
 
         colorChanger = new ColorChanger();
         colorChanger.setAllColorsDuration(10);
-        colorChanger.addColorState(Color.RED);
         colorChanger.addColorState(Color.BROWN);
         colorChanger.addColorState(Color.MAROON);
         colorChanger.addColorState(Color.FIREBRICK);
-
-        viewport = new ExtendViewport(3 * Constants.WORLD_SIZE, 3 * Constants.WORLD_SIZE);
-        font = new BitmapFont();
-        font.getData().setScale(3);
-        font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void render(float delta) {
+        chaseCam.update(delta);
         viewport.apply();
         colorChanger.act(delta);
         Gdx.gl.glClearColor(
@@ -67,19 +76,27 @@ public class MenuScreen extends InputAdapter implements Screen {
                 colorChanger.getColor().b,
                 Constants.BACKGROUND_COLOR.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.setProjectionMatrix(viewport.getCamera().combined);
 
+        menuLevel.update(delta);
+        menuLevel.setInstantCameraPosition(chaseCam.getCamera().position.x, chaseCam.getCamera().position.y);
 
         batch.begin();
-        font.draw(batch, "This is menu, tap anywhere you want",
-                viewport.getWorldWidth()/2, viewport.getWorldHeight()/2,
-                0, Align.center, false);
+        hudMenu.render(batch, delta);
         batch.end();
+
+        renderer.setProjectionMatrix(viewport.getCamera().combined);
+        renderer.setAutoShapeType(true);
+        renderer.begin();
+        menuLevel.render(batch, renderer);
+        renderer.end();
+
     }
 
     @Override
     public void resize(int width, int height) {
+        hudMenu.viewport.update(width, height, true);
         viewport.update(width, height, true);
+        Utils.aspect_ratio = width / height;
     }
 
     @Override
@@ -101,6 +118,14 @@ public class MenuScreen extends InputAdapter implements Screen {
     @Override
     public void hide() {
         batch.dispose();
-        font.dispose();
+        hudMenu.font.dispose();
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.BACK){
+            Gdx.app.exit();
+        }
+        return false;
     }
 }

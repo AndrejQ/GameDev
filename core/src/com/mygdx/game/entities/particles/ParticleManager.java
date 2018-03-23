@@ -10,13 +10,9 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 
 public class ParticleManager {
     public DelayedRemovalArray<Particle> particles;
-    public DelayedRemovalArray<Star> stars;
 
     public ParticleManager() {
         particles = new DelayedRemovalArray<Particle>();
-
-        //star adding in GG
-        stars = new DelayedRemovalArray<Star>();
     }
 
     public void update(float delta) {

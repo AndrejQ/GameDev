@@ -17,9 +17,10 @@ public class Background {
     Layer[] layers;
     public Background(int layersNumber) {
         layers = new Layer[layersNumber];
+        Color randomColor = Utils.randomColor();
         for (int i = 0; i < layersNumber; i++) {
             // TODO: 18.03.2018 config color: gray || colored
-            layers[i] = new Layer(i, Utils.shadesOfColor(Utils.randomColor(), layersNumber - i, layersNumber));
+            layers[i] = new Layer(i, Utils.shadesOfColor(randomColor, layersNumber - i, layersNumber));
         }
     }
 
@@ -31,9 +32,6 @@ public class Background {
     }
 
     public void render(ShapeRenderer renderer){
-//        for (Layer layer : layers) {
-//            layer.render(renderer);
-//        }
         for (int i = layers.length - 1; i >= 0; i--) {
             layers[i].render(renderer);
         }
@@ -145,6 +143,7 @@ public class Background {
 
             // chunkSize -> number of cells in one dimension
             public Chunk(int xOrder, int yOrder, int chunkSize) {
+                boolean up, down, left, right; // cell existence
                 this.xOrder = xOrder;
                 this.yOrder = yOrder;
                 this.chunkSize = chunkSize;
@@ -185,7 +184,8 @@ public class Background {
                 this.position = position;
                 this.size = size;
                 float colorRandomness = MathUtils.random(-1f, 1f) / 30;
-                this.color = new Color(color.r + colorRandomness,
+                this.color = new Color(
+                        color.r + colorRandomness,
                         color.g + colorRandomness,
                         color.b + colorRandomness,
                         color.a);
@@ -193,6 +193,12 @@ public class Background {
 
             public void render(ShapeRenderer renderer){
                 if (isTransparent) return;
+
+                // TODO: 22.03.2018 vrode rabotaet no ne osobo :/
+                if (Utils.outOfScreen(new Vector2(position.x + cameraPositionParallax.x * (1 - 1 / (0.5f * depth + 1)),
+                                position.y + cameraPositionParallax.y * (1 - 1 / (0.5f * depth + 1)))
+                        , cameraPositionParallax, size)) return;
+
                 renderer.setColor(color);
                 renderer.set(ShapeRenderer.ShapeType.Filled);
                 renderer.rect(position.x + cameraPositionParallax.x * (1 - 1 / (0.5f * depth + 1)),

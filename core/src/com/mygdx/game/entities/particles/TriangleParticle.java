@@ -35,13 +35,35 @@ public class TriangleParticle extends Particle {
         colorChanger.addColorState(Color.ORANGE);
     }
 
+    public TriangleParticle(Vector2 position, Vector2 velocity, Color[] colors, float size, Level level) {
+        super(Utils.randomRoundVector(size).add(position), velocity, level);
+        setLifeTime(Constants.TRIANGLE_PARTICLE_LIFE_TIME);
+
+        point2 = Utils.randomRoundVector(size).add(position);
+        point3 = Utils.randomRoundVector(size).add(position);
+        newPoint2 = new Vector2(point2);
+        newPoint3 = new Vector2(point3);
+        colorChanger = new ColorChanger();
+        colorChanger.setAllColorsDuration(getLifeTime());
+        for (Color color: colors) {
+            colorChanger.addColorState(color);
+        }
+    }
+
     @Override
     public void update(float delta) {
+        position.mulAdd(velocity, delta);
+        point2.mulAdd(velocity, delta);
+        point3.mulAdd(velocity, delta);
+
         colorChanger.act(delta);
         newPoint2 = new Vector2(point2);
         newPoint3 = new Vector2(point3);
-        newPoint2.add(new Vector2(position).add(new Vector2(point2).scl(-1)).scl(Utils.timeElapsed(startTime) / getLifeTime()));
-        newPoint3.add(new Vector2(position).add(new Vector2(point3).scl(-1)).scl(Utils.timeElapsed(startTime) / getLifeTime()));
+        // decreasing triangle size
+        newPoint2.add(new Vector2(position)
+                .add(new Vector2(point2).scl(-1)).scl(Utils.timeElapsed(startTime) / getLifeTime()));
+        newPoint3.add(new Vector2(position)
+                .add(new Vector2(point3).scl(-1)).scl(Utils.timeElapsed(startTime) / getLifeTime()));
     }
 
     @Override
