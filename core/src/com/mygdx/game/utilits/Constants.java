@@ -20,6 +20,8 @@ public class Constants {
     public static final float WEAPON_SPRAY = 20f;
     public static final float ENEMY_DISPOSE_DISTANCE = WORLD_SIZE * 2;
     public static final Color GG_COLOR = Color.YELLOW;
+    public static final String YELLOW_GG_KEY = "yellow_gg";
+    public static final String GRAY_GG_KEY = "gray_gg";
 
     //Background
     public static final float BACKGROUND_CELL_SIZE = 60f;

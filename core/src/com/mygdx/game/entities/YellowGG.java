@@ -51,12 +51,6 @@ public class YellowGG extends GG {
                 startTime = TimeUtils.nanoTime();
             }
         }
-
-        // stars spawn
-//        if (Utils.timeElapsed(startTimeForStars) > 1 / Constants.STAR_GENERATE_PER_SECOND){
-//            generateStar();
-//            startTimeForStars = TimeUtils.nanoTime();
-//        }
     }
 
     @Override

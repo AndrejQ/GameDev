@@ -10,10 +10,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.entities.GrayGG;
+import com.mygdx.game.entities.YellowGG;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.levels.MenuLevel;
 import com.mygdx.game.utilits.ChaseCam;
@@ -43,7 +47,14 @@ public class MenuScreen extends InputAdapter implements Screen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        game.setGamePlayScreen();
+        Vector2 tapPosition = viewport.unproject(new Vector2(screenX, screenY));
+        if (new Circle(menuLevel.yellowGG.position, menuLevel.yellowGG.radius)
+                .contains(tapPosition)){
+            game.setGamePlayScreen(Constants.YELLOW_GG_KEY);
+        } else if (new Circle(menuLevel.grayGG.position, menuLevel.grayGG.radius)
+                .contains(tapPosition)){
+            game.setGamePlayScreen(Constants.GRAY_GG_KEY);
+        }
         return true;
     }
 

@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entities.GG;
+import com.mygdx.game.entities.GrayGG;
 import com.mygdx.game.entities.YellowGG;
 import com.mygdx.game.entities.background.Background;
 import com.mygdx.game.entities.enemies.EnemiesManager;
 import com.mygdx.game.entities.missiles.MissilesManager;
 import com.mygdx.game.entities.particles.ParticleManager;
+import com.mygdx.game.utilits.Constants;
 
 /**
  * Created by Asus123 on 15.12.2017.
@@ -27,8 +29,17 @@ public class Level {
     public Level(){
         missilesManager = new MissilesManager();
         particleManager = new ParticleManager();
-        // TODO: 25.12.2017 make gg = new GG(!!without this!!) make environmentManager where use generateStars() method (remove it from gg)
         gg = new YellowGG(new Vector2(10, 10), new Vector2(), this);
+        enemiesManager = new EnemiesManager(gg);
+    }
+
+    public Level(String gg_key){
+        missilesManager = new MissilesManager();
+        particleManager = new ParticleManager();
+        if (gg_key.equals(Constants.GRAY_GG_KEY))
+            gg = new GrayGG(new Vector2(10, 10), new Vector2(), this);
+        else if (gg_key.equals(Constants.YELLOW_GG_KEY))
+            gg = new YellowGG(new Vector2(10, 10), new Vector2(), this);
         enemiesManager = new EnemiesManager(gg);
     }
 

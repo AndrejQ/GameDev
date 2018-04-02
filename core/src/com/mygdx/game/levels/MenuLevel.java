@@ -16,8 +16,8 @@ import com.mygdx.game.utilits.Constants;
  */
 
 public class MenuLevel extends Level {
-    YellowGG yellowGG;
-    GrayGG grayGG;
+    public YellowGG yellowGG;
+    public GrayGG grayGG;
 
     public MenuLevel() {
         particleManager = new ParticleManager();

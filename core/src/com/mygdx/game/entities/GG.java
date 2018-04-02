@@ -43,9 +43,6 @@ public class GG extends GameObject{
     public void init(Vector2 position){
         velocity = new Vector2();
         this.position = position;
-
-        //generate first stars
-//        generateStarsAround();
     }
 
     public Vector2 missileSpawnPosition(Vector2 tapPosition){

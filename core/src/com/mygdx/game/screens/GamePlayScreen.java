@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.controller.GameScreenControls;
+import com.mygdx.game.entities.GG;
 import com.mygdx.game.entities.background.Background;
 import com.mygdx.game.utilits.Assets;
 import com.mygdx.game.utilits.ChaseCam;
@@ -29,6 +30,7 @@ import com.mygdx.game.utilits.Utils;
 public class GamePlayScreen extends InputAdapter implements Screen {
 
     private Level level;
+    private GG gg; // gg in this level
     private SpriteBatch batch;
     private Viewport viewport;
     private MyGame game;
@@ -36,12 +38,14 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     private GameScreenControls controls;
     private ChaseCam chaseCam;
     private ColorAction colorAction;
+    private String gg_key;
     public Background background;
 
     private HudFPS hudFPS;
 
-    public GamePlayScreen(MyGame game){
+    public GamePlayScreen(MyGame game, String gg_key){
         this.game = game;
+        this.gg_key = gg_key;
     }
 
     @Override
@@ -50,7 +54,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         Assets.instance.init(am);
 
         batch = new SpriteBatch();
-        level = new Level();
+        level = new Level(gg_key);
         background = new Background(3);
         batch = new SpriteBatch();
         renderer = new ShapeRenderer();
