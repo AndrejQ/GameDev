@@ -36,10 +36,10 @@ public class YellowGG extends GG {
 
         colorChanger.act(delta);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             this.level.particleManager.particles.
                     add(new TriangleParticle(position,
-                            Utils.randomRoundVector(radius * 5),
+                            Utils.randomRoundVector(radius * 4),
                             new Color[]{colorChanger.getColor(), colorChanger.getColor(), Color.ORANGE},
                             radius,
                             level));

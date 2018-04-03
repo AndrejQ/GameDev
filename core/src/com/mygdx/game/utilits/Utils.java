@@ -36,6 +36,10 @@ public class Utils {
         return vector;
     }
 
+    public static Vector2 randomOnCircleVector(float radius){
+        return new Vector2(1, 0).rotate(MathUtils.random(360f)).scl(radius);
+    }
+
 
     public static float pow2(float num){
         return pow(num, 2);

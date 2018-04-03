@@ -5,8 +5,18 @@ package com.mygdx.game.entities.background;
  */
 
 class ChunkSpawner {
-    static int[][] spawnChunk(int chunkSize){
-        return new int[1][1];
+
+    static boolean[][] spawnChunk(int size, String key_tag){
+        float probability = 0.7f;
+
+        boolean[][] chunkMap;
+        chunkMap = new boolean[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (i % 3 == 0 || j % 3 == 0) chunkMap[i][j] = true;
+            }
+        }
+        return chunkMap;
     }
 
     enum BridgeInChunk{}

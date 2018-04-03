@@ -139,7 +139,7 @@ public class Background {
             int yOrder;
             private int chunkSize;
             private float cellSize = Constants.BACKGROUND_CELL_SIZE * Constants.BACKGROUND_CHUNK_SIZE / depthChunkSize;
-            Cell[] cells;
+            Cell[][] cells;
 
             // chunkSize -> number of cells in one dimension
             public Chunk(int xOrder, int yOrder, int chunkSize) {
@@ -147,19 +147,28 @@ public class Background {
                 this.xOrder = xOrder;
                 this.yOrder = yOrder;
                 this.chunkSize = chunkSize;
-                cells = new Cell[chunkSize * chunkSize];
+                cells = new Cell[chunkSize][chunkSize];
+                boolean[][] chunkMap = ChunkSpawner.spawnChunk(chunkSize, null);
                 for (int i = 0; i < cells.length; i++) {
-                    Vector2 cellPosition = new Vector2(
-                            xOrder * chunkSize * cellSize + (i % chunkSize) * cellSize,
-                            yOrder * chunkSize * cellSize + (i / chunkSize) * cellSize
-                    );
-                    cells[i] = new Cell(cellPosition, cellSize, colorTheme, Utils.randomBoolean(0.7f));
+                    for (int j = 0; j < cells[0].length; j++) {
+//                        Vector2 cellPosition = new Vector2(
+//                                xOrder * chunkSize * cellSize + (i % chunkSize) * cellSize,
+//                                yOrder * chunkSize * cellSize + (i / chunkSize) * cellSize
+//                        );
+                        Vector2 cellPosition = new Vector2(
+                                xOrder * chunkSize * cellSize + i * cellSize,
+                                yOrder * chunkSize * cellSize + j * cellSize
+                        );
+                        cells[i][j] = new Cell(cellPosition, cellSize, colorTheme, !chunkMap[i][j]);
+                    }
                 }
             }
 
             private void render(ShapeRenderer renderer){
                 for (int i = 0; i < cells.length; i++){
-                    cells[i].render(renderer);
+                    for (int j = 0; j < cells[0].length; j++) {
+                        cells[i][j].render(renderer);
+                    }
                 }
             }
 
