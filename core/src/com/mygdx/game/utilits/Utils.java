@@ -11,8 +11,7 @@ import com.badlogic.gdx.utils.TimeUtils;
  */
 
 public class Utils {
-
-    public static float aspect_ratio;
+    private static float aspect_ratio;
 
     public static float timeElapsed(long startTime) {
         return MathUtils.nanoToSec * (TimeUtils.nanoTime() - startTime);
@@ -111,8 +110,26 @@ public class Utils {
         }
     }
 
-    public static boolean outOfScreen(Vector2 targetPosition, Vector2 centerPosition, float raidus){
-        return Math.abs(targetPosition.x - centerPosition.x) - raidus > aspect_ratio * Constants.WORLD_SIZE ||
-        Math.abs(targetPosition.y - centerPosition.y) - raidus > Constants.WORLD_SIZE;
+    public static boolean outOfScreen(Vector2 targetPosition, Vector2 centerPosition, float radius){
+        return Math.abs(targetPosition.x - centerPosition.x) - radius > aspect_ratio * Constants.WORLD_SIZE / 2 ||
+        Math.abs(targetPosition.y - centerPosition.y) - radius > Constants.WORLD_SIZE / 2;
     }
+
+    public static boolean outOfVerticalUp(Vector2 targetPosition, Vector2 centerPosition, float radius) {
+        return (targetPosition.y - centerPosition.y) - radius > Constants.WORLD_SIZE / 2;
+    }
+
+    public static boolean outOfVerticalDown(Vector2 targetPosition, Vector2 centerPosition, float radius) {
+            return (centerPosition.y - targetPosition.y) - radius > Constants.WORLD_SIZE / 2;
+        }
+
+//    public static float getAspectRatio() {
+//        return aspect_ratio;
+//    }
+
+    public static void setAspectRatio(float aspect_ratio) {
+        Utils.aspect_ratio = aspect_ratio;
+    }
+
+
 }

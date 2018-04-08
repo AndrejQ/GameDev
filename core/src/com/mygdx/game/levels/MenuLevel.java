@@ -48,7 +48,7 @@ public class MenuLevel extends Level {
         yellowGG.render(batch, renderer);
         grayGG.render(batch, renderer);
         missilesManager.render(batch, renderer);
-        Gdx.app.log("", "" + particleManager.particles.size);
+//        Gdx.app.log("", "" + particleManager.particles.size);
         particleManager.render(batch, renderer);
     }
 }

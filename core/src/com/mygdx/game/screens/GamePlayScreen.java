@@ -30,7 +30,6 @@ import com.mygdx.game.utilits.Utils;
 public class GamePlayScreen extends InputAdapter implements Screen {
 
     private Level level;
-    private GG gg; // gg in this level
     private SpriteBatch batch;
     private Viewport viewport;
     private MyGame game;
@@ -55,7 +54,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
 
         batch = new SpriteBatch();
         level = new Level(gg_key);
-        background = new Background(3);
+        background = new Background(5);
         batch = new SpriteBatch();
         renderer = new ShapeRenderer();
         viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
@@ -101,7 +100,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         hudFPS.viewport.update(width, height, true);
         viewport.update(width, height, true);
 
-        Utils.aspect_ratio = width / height;
+        Utils.setAspectRatio((float) width / height);
 
         //set camera position centered to gg when resized
         chaseCam.getCamera().position.x = level.gg.position.x;
@@ -159,7 +158,7 @@ public class GamePlayScreen extends InputAdapter implements Screen {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.BACK){
+        if (keycode == Input.Keys.BACK || keycode == Input.Keys.Q){
             game.setMenuScreen();
         }
         return false;

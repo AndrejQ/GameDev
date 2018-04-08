@@ -107,7 +107,7 @@ public class MenuScreen extends InputAdapter implements Screen {
     public void resize(int width, int height) {
         hudMenu.viewport.update(width, height, true);
         viewport.update(width, height, true);
-        Utils.aspect_ratio = width / height;
+        Utils.setAspectRatio((float) width / height);
     }
 
     @Override

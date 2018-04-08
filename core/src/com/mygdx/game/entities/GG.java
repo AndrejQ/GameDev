@@ -36,7 +36,7 @@ public class GG extends GameObject{
     public void render(SpriteBatch batch, ShapeRenderer renderer) {
         renderer.set(ShapeRenderer.ShapeType.Filled);
         renderer.setColor(colorChanger.getColor());
-        renderer.circle(position.x, position.y, radius, 14);
+        renderer.circle(position.x, position.y, radius, 20);
     }
 
 

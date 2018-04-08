@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.background;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -15,7 +16,10 @@ import com.mygdx.game.utilits.Utils;
 
 public class Background {
     Layer[] layers;
+    private int map_id;
     public Background(int layersNumber) {
+        map_id = MathUtils.random(1, 4);
+        Gdx.app.log("Background", "map id = " + map_id);
         layers = new Layer[layersNumber];
         Color randomColor = Utils.randomColor();
         for (int i = 0; i < layersNumber; i++) {
@@ -57,6 +61,7 @@ public class Background {
             // depthChunkSize grows up with depth
             depthChunkSize = Utils.pow(Constants.BACKGROUND_CHUNK_SIZE, (int) depth / 5);
             depthChunkSize = Constants.BACKGROUND_CHUNK_SIZE * (1 + depth / 10);
+            Gdx.app.log("layer: "  + layerIndex, "size: " + depthChunkSize);
 
             active9Chunks[0] = new Chunk(-1, 1, (int) depthChunkSize);
             active9Chunks[1] = new Chunk(0, 1, (int) depthChunkSize);
@@ -115,6 +120,7 @@ public class Background {
 //                        active9Chunks[i].chunkSize);
                 newChunks[i] = uploadChunk(active9Chunks[i].xOrder + shiftX,
                         active9Chunks[i].yOrder + shiftY);
+                newChunks[i].setActiveChunkOrder(i);
             }
             return newChunks;
         }
@@ -135,9 +141,7 @@ public class Background {
         }
 
         private class Chunk {
-            int xOrder;
-            int yOrder;
-            private int chunkSize;
+            private int xOrder, yOrder, chunkSize, activeChunkOrder;
             private float cellSize = Constants.BACKGROUND_CELL_SIZE * Constants.BACKGROUND_CHUNK_SIZE / depthChunkSize;
             Cell[][] cells;
 
@@ -148,7 +152,7 @@ public class Background {
                 this.yOrder = yOrder;
                 this.chunkSize = chunkSize;
                 cells = new Cell[chunkSize][chunkSize];
-                boolean[][] chunkMap = ChunkSpawner.spawnChunk(chunkSize, null);
+                boolean[][] chunkMap = ChunkSpawner.spawnChunk(chunkSize, map_id);
                 for (int i = 0; i < cells.length; i++) {
                     for (int j = 0; j < cells[0].length; j++) {
 //                        Vector2 cellPosition = new Vector2(
@@ -180,40 +184,54 @@ public class Background {
                         .contains(cameraPosition.x - cameraPositionParallax.x * (1 - 1 / (0.5f * depth + 1)),
                                 cameraPosition.y - cameraPositionParallax.y * (1 - 1 / (0.5f * depth + 1)));
             }
-        }
 
-        class Cell{
-            Vector2 position;
-            boolean isTransparent;
-            private float size;
-            private Color color;
-
-            private Cell(Vector2 position, float size, Color color, boolean isTransparent) {
-                this.isTransparent = isTransparent;
-                this.position = position;
-                this.size = size;
-                float colorRandomness = MathUtils.random(-1f, 1f) / 30;
-                this.color = new Color(
-                        color.r + colorRandomness,
-                        color.g + colorRandomness,
-                        color.b + colorRandomness,
-                        color.a);
+            public void setActiveChunkOrder(int activeChunkOrder) {
+                this.activeChunkOrder = activeChunkOrder;
             }
 
-            public void render(ShapeRenderer renderer){
-                if (isTransparent) return;
+            class Cell{
+                Vector2 position;
+                boolean isTransparent;
+                private float size;
+                private Color color;
 
-                // TODO: 22.03.2018 vrode rabotaet no ne osobo :/
-                if (Utils.outOfScreen(new Vector2(position.x + cameraPositionParallax.x * (1 - 1 / (0.5f * depth + 1)),
-                                position.y + cameraPositionParallax.y * (1 - 1 / (0.5f * depth + 1)))
-                        , cameraPositionParallax, size)) return;
+                private Cell(Vector2 position, float size, Color color, boolean isTransparent) {
+                    this.isTransparent = isTransparent;
+                    this.position = position;
+                    this.size = size;
+                    float colorRandomness = MathUtils.random(-1f, 1f) / 30;
+                    this.color = new Color(
+                            color.r + colorRandomness,
+                            color.g + colorRandomness,
+                            color.b + colorRandomness,
+                            color.a);
+                }
 
-                renderer.setColor(color);
-                renderer.set(ShapeRenderer.ShapeType.Filled);
-                renderer.rect(position.x + cameraPositionParallax.x * (1 - 1 / (0.5f * depth + 1)),
-                        position.y + cameraPositionParallax.y * (1 - 1 / (0.5f * depth + 1)),
-                        size, size);
+                public void render(ShapeRenderer renderer){
+                    if (isTransparent) return;
+
+                    float x = position.x + cameraPositionParallax.x * (1 - 1 / (0.5f * depth + 1));
+                    float y = position.y + cameraPositionParallax.y * (1 - 1 / (0.5f * depth + 1));
+
+                    // TODO: 22.03.2018 vrode rabotaet no ne osobo :/
+                    if (Utils.outOfScreen(new Vector2(x, y), cameraPositionParallax, size)) return;
+//                    if (activeChunkOrder <= 2){
+//                        if (Utils.outOfVerticalUp(new Vector2(x, y), cameraPositionParallax, size)){
+//                            return;
+//                        }
+//                    } else if (activeChunkOrder >= 6){
+//                        if (Utils.outOfVerticalDown(new Vector2(x, y), cameraPositionParallax, size)){
+//                            return;
+//                        }
+//                    }
+
+                    renderer.setColor(color);
+                    renderer.set(ShapeRenderer.ShapeType.Filled);
+                    renderer.rect(x, y, size, size);
+                }
             }
         }
+
+
     }
 }
