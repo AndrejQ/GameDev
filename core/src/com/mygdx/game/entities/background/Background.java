@@ -18,7 +18,8 @@ public class Background {
     Layer[] layers;
     private int map_id;
     public Background(int layersNumber) {
-        map_id = MathUtils.random(1, 4);
+//        map_id = MathUtils.random(1, 4);
+        map_id = layersNumber;
         Gdx.app.log("Background", "map id = " + map_id);
         layers = new Layer[layersNumber];
         Color randomColor = Utils.randomColor();

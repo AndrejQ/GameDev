@@ -16,7 +16,7 @@ public abstract class Particle extends GameObject {
     protected float lifeTime;
 
     // Enemy with explosion (particles)
-    private Enemy mHostEnemy;
+    private GameObject mHostObject;
 
     public Particle(Particle particle){
         this(particle.position, particle.velocity, particle.level);
@@ -27,9 +27,9 @@ public abstract class Particle extends GameObject {
         this.startTime = TimeUtils.nanoTime();
     }
 
-    public Particle(Enemy hostEnemy,Vector2 position, Vector2 velocity, Level level){
+    public Particle(GameObject hostObject,Vector2 position, Vector2 velocity, Level level){
         this(position, velocity, level);
-        this.mHostEnemy = hostEnemy;
+        this.mHostObject = hostObject;
     }
 
     public boolean isTimeElapsed(){
@@ -41,13 +41,14 @@ public abstract class Particle extends GameObject {
     public void update(float delta) {
         super.update(delta);
         // explosions and particles move with host enemy
-        if (mHostEnemy != null) {
-            position.mulAdd(mHostEnemy.velocity, delta);
+        if (mHostObject != null) {
+            position.mulAdd(mHostObject.velocity, delta);
         }
     }
 
-    public void setLifeTime(float lifeTime) {
+    public Particle setLifeTime(float lifeTime) {
         this.lifeTime = lifeTime;
+        return this;
     }
 
     public float getLifeTime() {

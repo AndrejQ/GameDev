@@ -3,9 +3,12 @@ package com.mygdx.game.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.mygdx.game.entities.particles.TriangleParticle;
+import com.mygdx.game.entities.missiles.Missile;
+import com.mygdx.game.entities.missiles.RoundMissile;
+import com.mygdx.game.entities.particles.RoundParticle;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.utilits.Constants;
 import com.mygdx.game.utilits.Utils;
@@ -26,18 +29,18 @@ public class GrayGG extends GG {
     public void update(float delta) {
         velocity.mulAdd(velocity, -Constants.FRICTION * 60 * delta); // air friction
         super.update(delta);
-        for (int i = 0; i < 2; i++) {
+
+        // spawn harmless round particles
+        if (Constants.ROUND_PARTICLE_SPAWN_PER_SECOND * delta > MathUtils.random()) {
             this.level.particleManager.particles.
-                    add(new TriangleParticle(position,
-                            Utils.randomRoundVector(radius * 5),
-                            new Color[]{Color.BLACK, Color.DARK_GRAY, Color.LIGHT_GRAY},
-                            radius,
+                    add(new RoundParticle(Utils.randomRoundVector(radius).add(position),
+                            new Vector2(),
                             level));
         }
 
-        // light missile spawn
+        // Round missile spawn
         if (isPlayerTouching){
-            if (Utils.timeElapsed(startTime) > 1 / Constants.LIGHT_MISSILE_SPAWN_PER_SECOND){
+            if (Utils.timeElapsed(startTime) > 1 / Constants.ROUND_MISSILE_SPAWN_PER_SECOND){
                 missileSpawn(tapPosition);
                 startTime = TimeUtils.nanoTime();
             }
@@ -51,7 +54,17 @@ public class GrayGG extends GG {
         renderer.circle(position.x, position.y, radius, 10);
     }
 
-//    @Override
+    @Override
+    public void missileSpawn(Vector2 tapPosition) {
+        Missile missile =new RoundMissile(missileSpawnPosition(tapPosition),
+                missileSpawnDirection(tapPosition).scl(Constants.ROUND_MISSILE_VELOCITY), level);
+
+        level.missilesManager.missiles.add(missile);
+        velocity.add(new Vector2(missile.velocity)
+                .scl(- Constants.ROUND_MISSILE_MASS / Constants.GG_MASS));
+    }
+
+    //    @Override
 //    public Vector2 missileSpawnPosition(Vector2 tapPosition) {
 //        return super.missileSpawnPosition(tapPosition);
 //    }

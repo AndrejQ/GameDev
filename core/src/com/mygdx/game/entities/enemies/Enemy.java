@@ -21,7 +21,9 @@ public abstract class Enemy extends GameObject {
 
     void velocityUpdate(){}
 
-    public void missileCatch(Missile missile){}
+    public void missileCatch(Missile missile){
+        missile.missileExplode(this);
+    }
 
     public void collideWithOtherEnemy(Enemy otherEnemy){}
 

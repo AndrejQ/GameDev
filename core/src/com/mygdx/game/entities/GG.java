@@ -61,6 +61,7 @@ public class GG extends GameObject{
         return connection.nor();
     }
 
+    // TODO: 25.06.2018 make this like: missileSpawn(tapPosition, Missile missileType) 'missile type can be enum'
     public void missileSpawn(Vector2 tapPosition){
         Missile missile =new LightMissile(missileSpawnPosition(tapPosition),
                 missileSpawnDirection(tapPosition).scl(Constants.LIGHT_MISSILE_VELOCITY), level);
@@ -69,6 +70,8 @@ public class GG extends GameObject{
         velocity.add(new Vector2(missile.velocity)
                 .scl(- Constants.LIGHT_MISSILE_MASS / Constants.GG_MASS));
     }
+
+    
 
 //    private void generateStarsAround(){
 //        for (int i = 0; i < Constants.STAR_COUNT; i++) {

@@ -68,6 +68,7 @@ public class SimpleEnemy extends Enemy {
 
     @Override
     public void missileCatch(Missile missile) {
+        super.missileCatch(missile);
         health -= missile.damage;
 
         // reaction of enemy

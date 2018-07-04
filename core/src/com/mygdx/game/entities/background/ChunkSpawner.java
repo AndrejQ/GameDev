@@ -22,7 +22,7 @@ class ChunkSpawner {
         boolean[][] chunkMap;
         chunkMap = new boolean[size][size];
         switch (map_id){
-            case 1: // random pipes
+            case 4: // random pipes
                 if (size > 14) break;
                 int flag = MathUtils.random(2);
                 for (int i = 0; i < size; i++) {
@@ -41,7 +41,7 @@ class ChunkSpawner {
                     }
                 }
                 break;
-            case 2: // squares
+            case 3: // squares
                 if (size > 11) break;
                 for (int i = 0; i < size; i++) {
                     for (int j = 0; j < size; j++) {
@@ -49,28 +49,21 @@ class ChunkSpawner {
                     }
                 }
                 break;
-            case 3: // randomness
+            case 5: // randomness
                 for (int i = 0; i < size; i++) {
                     for (int j = 0; j < size; j++) {
                         chunkMap[i][j] = Utils.randomBoolean(0.7f);
                     }
                 }
                 break;
-            case 4: // mosaic
-                if (size > 11) break;
-                for (int i = 0; i < size; i++) {
-                    for (int j = 0; j < size; j++) {
-                        if ((i + (size) * j) % 2 == 1) chunkMap[i][j] = true;
-                    }
-                }
-                break;
-            case 5: // chess
-                for (int i = 0; i < size; i++) {
-                    for (int j = 0; j < size; j++) {
-                        chunkMap[i][j] = Utils.randomBoolean(0.7f);
-                    }
-                }
-                break;
+//            case 4: // mosaic
+//                if (size > 11) break;
+//                for (int i = 0; i < size; i++) {
+//                    for (int j = 0; j < size; j++) {
+//                        if ((i + (size) * j) % 2 == 1) chunkMap[i][j] = true;
+//                    }
+//                }
+//                break;
         }
 
 
