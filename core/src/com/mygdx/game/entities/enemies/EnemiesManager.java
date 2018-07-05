@@ -15,24 +15,29 @@ import com.mygdx.game.utilits.Utils;
  */
 
 public class EnemiesManager {
-    long startTime;
+    long startTimeSimpleEnemy;
+    long startTimeSquareEnemy;
     public DelayedRemovalArray<Enemy> enemies;
     GG gg;
 
 
     public EnemiesManager(GG gg) {
         enemies = new DelayedRemovalArray<Enemy>();
-        startTime = TimeUtils.nanoTime();
+        startTimeSimpleEnemy = TimeUtils.nanoTime();
+        startTimeSquareEnemy = TimeUtils.nanoTime();
         this.gg = gg;
     }
 
     public void update(float delta){
 
         // spawn (around gg)
-        if (Utils.timeElapsed(startTime) > 1 / Constants.SIMPLE_ENEMY_SPAWN_RATE_PER_SECOND){
-            enemies.add(new SimpleEnemy(Utils.randomVector(Constants.WORLD_SIZE).add(gg.position), gg.level));
-
-            startTime = TimeUtils.nanoTime();
+//        if (Utils.timeElapsed(startTimeSimpleEnemy) > 1 / Constants.SIMPLE_ENEMY_SPAWN_RATE_PER_SECOND){
+//            enemies.add(new SimpleEnemy(Utils.randomVector(Constants.WORLD_SIZE).add(gg.position), gg.level));
+//            startTimeSimpleEnemy = TimeUtils.nanoTime();
+//        }
+        if (Utils.timeElapsed(startTimeSquareEnemy) > 1 / Constants.SQUARE_ENEMY_SPAWN_RATE_PER_SECOND){
+            enemies.add(new SquareEnemy(Utils.randomVector(Constants.WORLD_SIZE).add(gg.position), gg.level));
+            startTimeSquareEnemy = TimeUtils.nanoTime();
         }
         // update
         for (Enemy enemy : enemies){
@@ -40,9 +45,10 @@ public class EnemiesManager {
             for (int i = 0; i < enemies.size; i++) {
                 enemy.collideWithOtherEnemy(enemies.get(i));
             }
-            enemy.update(delta);
-            // cont distance for gg
+            // count distance for gg
             enemy.dstForGG = new Vector2(gg.position).add(new Vector2(enemy.position).scl(-1));
+
+            enemy.update(delta);
 
             if (enemy.dstForGG.len2() > Utils.pow2(Constants.ENEMY_DISPOSE_DISTANCE)){
                 enemies.removeValue(enemy, false);

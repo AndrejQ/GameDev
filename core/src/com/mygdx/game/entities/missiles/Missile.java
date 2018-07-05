@@ -43,10 +43,11 @@ public abstract class Missile extends GameObject {
 
     public boolean collideWithEnemy(DelayedRemovalArray<Enemy> enemies){
         for (Enemy enemy : enemies){
-            if (new Circle(enemy.position, enemy.radius).contains(position)){
+            if (enemy.contains(position)){
                 enemy.missileCatch(this);
                 if (enemy.health < 0){
-                    enemies.removeValue(enemy, false);
+//                    enemies.removeValue(enemy, false);
+                    enemy.death();
                     Gdx.input.vibrate(30);
                 }
                 return true;

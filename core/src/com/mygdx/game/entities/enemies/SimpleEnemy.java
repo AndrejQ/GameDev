@@ -3,6 +3,7 @@ package com.mygdx.game.entities.enemies;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -18,7 +19,7 @@ import com.mygdx.game.utilits.Utils;
 public class SimpleEnemy extends Enemy {
 
     private long startTime;
-    private float timeBetweenAdding = Constants.SIMPLE_ENEMY_TIME_BETWEEN_ADDING;
+    private float timeBetweenAdding = Constants.SIMPLE_ENEMY_TIME_BETWEEN_ADDING_VELOCITY;
     private Color color;
 
     public SimpleEnemy(Vector2 position, Level level){
@@ -73,12 +74,17 @@ public class SimpleEnemy extends Enemy {
 
         // reaction of enemy
         color.r = 0.6f - 0.5f * health / Constants.SIMPLE_ENEMY_HEALTH;
-        timeBetweenAdding = Constants.SIMPLE_ENEMY_TIME_BETWEEN_ADDING * 1 /
+        timeBetweenAdding = Constants.SIMPLE_ENEMY_TIME_BETWEEN_ADDING_VELOCITY * 1 /
                 (0.5f * (Constants.SIMPLE_ENEMY_HEALTH - health) + 1);
 
         Vector2 direction = new Vector2(missile.position.x - position.x, missile.position.y - position.y).nor();
         //sparkling after damage
         missile.missileExplode(this, direction);
+    }
+
+    @Override
+    public boolean contains(Vector2 pointPosition) {
+        return new Circle(position, radius).contains(pointPosition);
     }
 
     // TODO: 12.02.2018 fix rectangle collision method

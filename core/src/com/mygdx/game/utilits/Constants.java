@@ -32,10 +32,23 @@ public class Constants {
     public static final float SIMPLE_ENEMY_ADD_VELOCITY = 25f;
     public static final float SIMPLE_ENEMY_RADIUS = 15f;
     public static final float SIMPLE_ENEMY_HEALTH = 20f;
-    public static final float SIMPLE_ENEMY_TIME_BETWEEN_ADDING = 0.5f;
+    public static final float SIMPLE_ENEMY_TIME_BETWEEN_ADDING_VELOCITY = 0.5f;
     public static final float SIMPLE_ENEMY_SPAWN_RATE_PER_SECOND = 0.2f;
     public static final float SIMPLE_ENEMY_MASS = 10f;
     public static final Color SIMPLE_ENEMY_COLOR = Color.BLACK;
+
+    //square enemy
+    public static final float SQUARE_ENEMY_ADD_VELOCITY = 25f;
+    public static final float SQUARE_ENEMY_LENGTH = 15f;
+    public static final float SQUARE_ENEMY_ROTATION = 10f;
+    public static final float SQUARE_ENEMY_SPEED = 15f;
+    public static final float SQUARE_ENEMY_ACCELERATION = 80f;
+    public static final float SQUARE_ENEMY_HEALTH = 4f;
+    public static final float SQUARE_ENEMY_SPAWN_RATE_PER_SECOND = 0.1f;
+    public static final float SQUARE_ENEMY_MASS = 10f;
+    public static final int SQUARE_ENEMY_RECURSION = 2; // number of separating times
+    public static final Color SQUARE_ENEMY_COLOR = Color.RED;
+    public static final Color[] SQUARE_ENEMY_COLORS = new Color[]{Color.LIME, Color.PURPLE, Color.PINK};
 
 
     //Light missile

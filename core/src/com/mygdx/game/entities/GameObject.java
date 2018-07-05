@@ -52,6 +52,8 @@ public abstract class GameObject {
         renderer.circle(position.x, position.y, radius, 20);
     }
 
+    public boolean contains(Vector2 pointPosition){ return false; }
+
     public boolean collideWithWalls(){
         return Constants.WORLD_BOUNDS.contains(new Circle(position, radius));
     }

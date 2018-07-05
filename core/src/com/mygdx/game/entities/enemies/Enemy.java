@@ -35,4 +35,6 @@ public abstract class Enemy extends GameObject {
     public void collideWithGG(GG gg){
         collideWithObject(gg);
     }
+
+    public void death(){level.enemiesManager.enemies.removeValue(this, false);}
 }

@@ -96,7 +96,7 @@ public class LightMissile extends Missile {
 
     @Override
     public void missileExplode(Enemy hostEnemy, Vector2 direction) {
-        level.particleManager.particles.removeValue(lightParticle, false);
+//        level.particleManager.particles.removeValue(lightParticle, false);
 
         float Bound = Constants.SPARKLE_PARTICLE_START_VELOCITY;
         float startVelocity = Constants.SPARKLE_PARTICLE_START_VELOCITY;

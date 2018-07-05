@@ -23,6 +23,7 @@ public class Background {
         Gdx.app.log("Background", "map id = " + map_id);
         layers = new Layer[layersNumber];
         Color randomColor = Utils.randomColor();
+        randomColor = Color.LIGHT_GRAY;
         for (int i = 0; i < layersNumber; i++) {
             // TODO: 18.03.2018 config color: gray || colored
             layers[i] = new Layer(i, Utils.shadesOfColor(randomColor, layersNumber - i, layersNumber));
