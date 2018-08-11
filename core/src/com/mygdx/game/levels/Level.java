@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entities.GG;
 import com.mygdx.game.entities.GrayGG;
 import com.mygdx.game.entities.YellowGG;
-import com.mygdx.game.entities.background.Background;
 import com.mygdx.game.entities.enemies.EnemiesManager;
 import com.mygdx.game.entities.missiles.MissilesManager;
 import com.mygdx.game.entities.particles.ParticleManager;

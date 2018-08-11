@@ -60,7 +60,7 @@ public class EnemiesManager {
 
         // render
         for (Enemy enemy : enemies){
-            enemy.render(batch, renderer);
+            if (!Utils.outOfScreen(enemy.position, gg.level.getInstantCameraPosition(), 2 * enemy.radius)) enemy.render(batch, renderer);
         }
     }
 }

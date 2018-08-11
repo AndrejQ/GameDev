@@ -11,17 +11,19 @@ public class Constants {
 
     public static final float WORLD_SIZE = 200;
     public static final float FRICTION = 0.02f;
-    public static final Color BACKGROUND_COLOR = Color.BLACK;
+    public static final Color BACKGROUND_COLOR = Color.WHITE;
     public static final Rectangle WORLD_BOUNDS = new Rectangle(0, 0, 1.8f * WORLD_SIZE, WORLD_SIZE);
 
     //GG
     public static final float GG_RADIUS = 10f;
-    public static final float GG_MASS = 5f;
+    public static final float GG_MASS = 8f;
     public static final float WEAPON_SPRAY = 20f;
     public static final float ENEMY_DISPOSE_DISTANCE = WORLD_SIZE * 2;
     public static final Color GG_COLOR = Color.YELLOW;
     public static final String YELLOW_GG_KEY = "yellow_gg";
     public static final String  GRAY_GG_KEY = "gray_gg";
+    public static final float GG_HP = 100;
+    public static final float GG_DECREASING_HP_PER_SECOND = 5;
 
     //Background
     public static final float BACKGROUND_CELL_SIZE = 60f;
@@ -41,18 +43,19 @@ public class Constants {
     public static final float SQUARE_ENEMY_ADD_VELOCITY = 25f;
     public static final float SQUARE_ENEMY_LENGTH = 15f;
     public static final float SQUARE_ENEMY_ROTATION = 10f;
-    public static final float SQUARE_ENEMY_SPEED = 15f;
-    public static final float SQUARE_ENEMY_ACCELERATION = 80f;
+    public static final float SQUARE_ENEMY_SPEED = 30f;
+    public static final float SQUARE_ENEMY_ACCELERATION = 300f;
     public static final float SQUARE_ENEMY_HEALTH = 4f;
     public static final float SQUARE_ENEMY_SPAWN_RATE_PER_SECOND = 0.1f;
-    public static final float SQUARE_ENEMY_MASS = 10f;
+    public static final float SQUARE_ENEMY_MASS = 2f;
+    public static final float SQUARE_ENEMY_SCORE_AFTER_DEATH = 10f;
     public static final int SQUARE_ENEMY_RECURSION = 2; // number of separating times
     public static final Color SQUARE_ENEMY_COLOR = Color.RED;
     public static final Color[] SQUARE_ENEMY_COLORS = new Color[]{Color.LIME, Color.PURPLE, Color.PINK};
 
 
     //Light missile
-    public static final float LIGHT_MISSILE_MASS = 2f;
+    public static final float LIGHT_MISSILE_MASS = 3f;
     public static final float LIGHT_MISSILE_DAMAGE = 5f;
     public static final float LIGHT_MISSILE_VELOCITY = 100f;
     public static final float LIGHT_MISSILE_LIFETIME = 1.2f;

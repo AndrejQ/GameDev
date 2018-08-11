@@ -25,12 +25,19 @@ public class GG extends GameObject{
     public boolean isPlayerTouching;
     public Vector2 tapPosition;
     protected ColorChanger colorChanger;
+    float health;
 
     public GG(Vector2 position, Vector2 velocity, Level level) {
         super(position, velocity, level);
-
+        health = Constants.GG_HP;
     }
 
+    @Override
+    public void update(float delta) {
+        super.update(delta);
+        health -= delta * Constants.GG_DECREASING_HP_PER_SECOND;
+        health = health < 0 ? 0 : health;
+    }
 
     @Override
     public void render(SpriteBatch batch, ShapeRenderer renderer) {
@@ -71,9 +78,16 @@ public class GG extends GameObject{
                 .scl(- Constants.LIGHT_MISSILE_MASS / Constants.GG_MASS));
     }
 
-    
+    public void addScore(float score){
+        health += score;
+        health = health > Constants.GG_HP ? Constants.GG_HP : health;
+    }
 
-//    private void generateStarsAround(){
+    public float getHealth() {
+        return health;
+    }
+
+    //    private void generateStarsAround(){
 //        for (int i = 0; i < Constants.STAR_COUNT; i++) {
 //            generateStar();
 //        }

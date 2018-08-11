@@ -14,6 +14,7 @@ import com.mygdx.game.utilits.Utils;
 public abstract class Enemy extends GameObject {
     public float health;
     Vector2 dstForGG;
+    float scoreAfterDeath;
 
     public Enemy(Vector2 position, Vector2 velocity, Level level) {
         super(position, velocity, level);
@@ -36,5 +37,7 @@ public abstract class Enemy extends GameObject {
         collideWithObject(gg);
     }
 
-    public void death(){level.enemiesManager.enemies.removeValue(this, false);}
+    public void death(){
+        level.gg.addScore(scoreAfterDeath);
+        level.enemiesManager.enemies.removeValue(this, false);}
 }

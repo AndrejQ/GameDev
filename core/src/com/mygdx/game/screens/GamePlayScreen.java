@@ -17,6 +17,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.controller.GameScreenControls;
 import com.mygdx.game.entities.GG;
 import com.mygdx.game.entities.background.Background;
+import com.mygdx.game.entities.background.BackgroundDots;
 import com.mygdx.game.utilits.Assets;
 import com.mygdx.game.utilits.ChaseCam;
 import com.mygdx.game.utilits.Constants;
@@ -40,6 +41,9 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     private ColorAction colorAction;
     private String gg_key;
     public Background background;
+    public BackgroundDots backgroundDots;
+
+    private boolean isPaused;
 
     private HudFPS hudFPS;
 
@@ -56,6 +60,8 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         batch = new SpriteBatch();
         level = new Level(gg_key);
         background = new Background(MathUtils.random(3, 5));
+        backgroundDots = new BackgroundDots();
+
         batch = new SpriteBatch();
         renderer = new ShapeRenderer();
         viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
@@ -73,12 +79,16 @@ public class GamePlayScreen extends InputAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+
+        if (isPaused) return;
+
         chaseCam.update(delta);
         level.update(delta);
         level.setInstantCameraPosition(chaseCam.getCamera().position.x,
                 chaseCam.getCamera().position.y);
 
-        background.update(new Vector2(chaseCam.getCamera().position.x, chaseCam.getCamera().position.y));
+//        background.update(new Vector2(chaseCam.getCamera().position.x, chaseCam.getCamera().position.y));
+        backgroundDots.update(new Vector2(chaseCam.getCamera().position.x, chaseCam.getCamera().position.y));
 
         viewport.apply();
         Gdx.gl.glClearColor(Params.background_color.r, Params.background_color.g, Params.background_color.b, 1);
@@ -88,11 +98,14 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         renderer.setAutoShapeType(true);
         batch.begin();
         renderer.begin();
-        background.render(renderer);
+//        background.render(renderer);
+        backgroundDots.render(renderer);
+
         level.render(batch, renderer);
         batch.end();
         renderer.end();
         hudFPS.render(batch, delta); // fps
+        hudFPS.render(renderer, level); // hud
 
     }
 
@@ -161,6 +174,9 @@ public class GamePlayScreen extends InputAdapter implements Screen {
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.BACK || keycode == Input.Keys.Q){
             game.setMenuScreen();
+        }
+        if (keycode == Input.Keys.P){
+        isPaused = !isPaused;
         }
         return false;
     }

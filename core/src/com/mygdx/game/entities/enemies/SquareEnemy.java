@@ -43,6 +43,9 @@ public class SquareEnemy extends Enemy {
         direction = -1 + 2 * MathUtils.random(1);
         mLength = Constants.SQUARE_ENEMY_LENGTH * Utils.pow(2, recurcion);
         mRecursionLevel = recurcion;
+        scoreAfterDeath = mRecursionLevel == 0 ? Constants.SQUARE_ENEMY_SCORE_AFTER_DEATH : 0;
+        radius = mLength / 2;
+        setMass(Constants.SQUARE_ENEMY_MASS * Utils.pow(2, recurcion));
     }
 
     @Override
@@ -52,15 +55,11 @@ public class SquareEnemy extends Enemy {
 
     @Override
     public void missileCatch(Missile missile) {
+        velocity.add(new Vector2(missile.velocity).scl(missile.getMass() / this.getMass()));
         super.missileCatch(missile);
         health -= missile.damage;
         missile.missileExplode(this,
                 new Vector2(missile.position.x - position.x, missile.position.y - position.y).nor());
-    }
-
-    @Override
-    public void collideWithOtherEnemy(Enemy otherEnemy) {
-        super.collideWithOtherEnemy(otherEnemy);
     }
 
     @Override
@@ -88,6 +87,7 @@ public class SquareEnemy extends Enemy {
 
     @Override
     public boolean contains(Vector2 pointPosition) {
+//        return
         return new Circle(position, mLength / 2).contains(pointPosition);
     }
 
@@ -98,7 +98,7 @@ public class SquareEnemy extends Enemy {
                     new Vector2(position),
                     Utils.randomRoundVector(Constants.SPARKLE_PARTICLE_START_VELOCITY),
                     Constants.SQUARE_ENEMY_COLORS,
-                    mLength,
+                    mLength / 1.5f,
                     level
             ));
         }
@@ -115,5 +115,10 @@ public class SquareEnemy extends Enemy {
             }
         }
         super.death();
+    }
+
+    @Override
+    public void collideWithOtherEnemy(Enemy otherEnemy) {
+        collideWithObject(otherEnemy);
     }
 }

@@ -131,5 +131,7 @@ public class Utils {
         Utils.aspect_ratio = aspect_ratio;
     }
 
-
+    public static float getAspectRatio() {
+        return aspect_ratio;
+    }
 }

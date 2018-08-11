@@ -27,6 +27,7 @@ public class LightMissile extends Missile {
         startTime = TimeUtils.nanoTime();
         damage = Constants.LIGHT_MISSILE_DAMAGE;
         lifetime = Constants.LIGHT_MISSILE_LIFETIME;
+        setMass(Constants.LIGHT_MISSILE_MASS);
 
         // add light
         lightParticle = new Light(this.position, this.velocity, 2*Constants.LIGHT_MISSILE_LENGTH, level);
