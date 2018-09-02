@@ -14,35 +14,18 @@ import com.mygdx.game.utilits.Utils;
  * Created by Asus123 on 15.12.2017.
  */
 
-public abstract class GameObject {
+public abstract class GameObject extends MaterialPoint {
 
-    float mass;
     protected long startTime;
-    public Vector2 position;
-    public Vector2 velocity;
-    public Level level;
-
     public float radius;
 
     public GameObject(Vector2 position, Vector2 velocity, Level level) {
-        this.position = position;
-        this.velocity = velocity;
-        this.level = level;
+        super(position, velocity, level);
     }
 
+    @Override
     public void update(float delta) {
-        position.mulAdd(velocity, delta);
-
-//        //Bounds collision
-//        if (position.x < Constants.WORLD_BOUNDS.x + radius) {
-//            this.reflect_left();
-//        } else if (position.x > Constants.WORLD_BOUNDS.x + Constants.WORLD_BOUNDS.width - radius) {
-//            this.reflect_right();
-//        } else if (position.y < Constants.WORLD_BOUNDS.y + radius) {
-//            this.reflect_down();
-//        } else if (position.y > Constants.WORLD_BOUNDS.y + Constants.WORLD_BOUNDS.height - radius) {
-//            this.reflect_up();
-//        }
+        super.update(delta);
     }
 
     public void render(SpriteBatch batch, ShapeRenderer renderer){
@@ -66,7 +49,7 @@ public abstract class GameObject {
 
         Vector2 position1 = position.cpy();
         Vector2 position2 = object.position.cpy();
-        Vector2 axisDirection = position2.cpy().mulAdd(position1, -1).nor(); // from this to enemy
+        Vector2 axisDirection = position2.cpy().sub(position1).nor(); // from this to enemy
 
         float vel1 = velocity.dot(axisDirection);
         float vel2 = object.velocity.dot(axisDirection);
@@ -94,13 +77,6 @@ public abstract class GameObject {
     }
 
 
-    public float getMass() {
-        return mass;
-    }
-
-    public void setMass(float mass) {
-        this.mass = mass;
-    }
 
     protected void sparkleTrace(Particle[] particles){
         for (Particle particle : particles) {
@@ -109,14 +85,14 @@ public abstract class GameObject {
     }
 
     // TODO: change reflections. They are glitchy
-    public void reflect_up(){
-        velocity.y -= 2 * Math.abs(velocity.y);
-    }
-    public void reflect_down(){
-        velocity.y += 2 * Math.abs(velocity.y);
-    }
-    public void reflect_left(){velocity.x += 2 * Math.abs(velocity.x);}
-    public void reflect_right(){
-        velocity.x -= 2 * Math.abs(velocity.x);
-    }
+//    public void reflect_up(){
+//        velocity.y -= 2 * Math.abs(velocity.y);
+//    }
+//    public void reflect_down(){
+//        velocity.y += 2 * Math.abs(velocity.y);
+//    }
+//    public void reflect_left(){velocity.x += 2 * Math.abs(velocity.x);}
+//    public void reflect_right(){
+//        velocity.x -= 2 * Math.abs(velocity.x);
+//    }
 }

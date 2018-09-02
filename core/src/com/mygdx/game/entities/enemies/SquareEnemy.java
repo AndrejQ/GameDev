@@ -65,7 +65,7 @@ public class SquareEnemy extends Enemy {
     @Override
     public void update(float delta) {
         super.update(delta);
-        velocity.mulAdd(velocity, -Constants.FRICTION); // air friction
+//        velocity.mulAdd(velocity, -Constants.FRICTION); // air friction
 
         mAngle += direction * delta * Constants.SQUARE_ENEMY_ROTATION;
         mColorChanger.act(delta);

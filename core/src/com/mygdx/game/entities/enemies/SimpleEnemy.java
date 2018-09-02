@@ -37,7 +37,7 @@ public class SimpleEnemy extends Enemy {
 
     @Override
     public void update(float delta) {
-        velocity.mulAdd(velocity, -Constants.FRICTION); // air friction
+//        velocity.mulAdd(velocity, -Constants.FRICTION); // air friction
         super.update(delta);
 
         if (Utils.timeElapsed(startTime) > timeBetweenAdding){

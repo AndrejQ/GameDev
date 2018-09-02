@@ -50,9 +50,9 @@ public class EnemiesManager {
 
             enemy.update(delta);
 
-            if (enemy.dstForGG.len2() > Utils.pow2(Constants.ENEMY_DISPOSE_DISTANCE)){
-                enemies.removeValue(enemy, false);
-            }
+//            if (enemy.dstForGG.len2() > Utils.pow2(Constants.ENEMY_DISPOSE_DISTANCE)){
+//                enemies.removeValue(enemy, false);
+//            }
         }
     }
 

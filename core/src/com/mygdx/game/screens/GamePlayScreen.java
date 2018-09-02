@@ -119,6 +119,8 @@ public class GamePlayScreen extends InputAdapter implements Screen {
         //set camera position centered to gg when resized
         chaseCam.getCamera().position.x = level.gg.position.x;
         chaseCam.getCamera().position.y = level.gg.position.y;
+
+        backgroundDots.resize();
     }
 
     @Override

@@ -46,7 +46,7 @@ public class Constants {
     public static final float SQUARE_ENEMY_SPEED = 30f;
     public static final float SQUARE_ENEMY_ACCELERATION = 300f;
     public static final float SQUARE_ENEMY_HEALTH = 4f;
-    public static final float SQUARE_ENEMY_SPAWN_RATE_PER_SECOND = 0.1f;
+    public static final float SQUARE_ENEMY_SPAWN_RATE_PER_SECOND = 0.1f * 0.1f;
     public static final float SQUARE_ENEMY_MASS = 2f;
     public static final float SQUARE_ENEMY_SCORE_AFTER_DEATH = 10f;
     public static final int SQUARE_ENEMY_RECURSION = 2; // number of separating times
@@ -55,9 +55,9 @@ public class Constants {
 
 
     //Light missile
-    public static final float LIGHT_MISSILE_MASS = 3f;
+    public static final float LIGHT_MISSILE_MASS = 2f;
     public static final float LIGHT_MISSILE_DAMAGE = 5f;
-    public static final float LIGHT_MISSILE_VELOCITY = 100f;
+    public static final float LIGHT_MISSILE_VELOCITY = 200f;
     public static final float LIGHT_MISSILE_LIFETIME = 1.2f;
     public static final float LIGHT_MISSILE_SPAWN_PER_SECOND = 5f;
     public static final float LIGHT_MISSILE_LENGTH = 6f;

@@ -27,7 +27,7 @@ public class GrayGG extends GG {
 
     @Override
     public void update(float delta) {
-        velocity.mulAdd(velocity, -Constants.FRICTION * 60 * delta); // air friction
+//        velocity.mulAdd(velocity, -Constants.FRICTION * 60 * delta); // air friction
         super.update(delta);
 
         // spawn harmless round particles

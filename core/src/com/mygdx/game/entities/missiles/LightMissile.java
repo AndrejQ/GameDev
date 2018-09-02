@@ -30,8 +30,10 @@ public class LightMissile extends Missile {
         setMass(Constants.LIGHT_MISSILE_MASS);
 
         // add light
-        lightParticle = new Light(this.position, this.velocity, 2*Constants.LIGHT_MISSILE_LENGTH, level);
-        level.particleManager.particles.add(lightParticle);
+//        lightParticle = new Light(this.position, this.velocity, 2*Constants.LIGHT_MISSILE_LENGTH, level);
+//        level.particleManager.particles.add(lightParticle);
+
+        friction = 0;
     }
 
 
@@ -44,6 +46,7 @@ public class LightMissile extends Missile {
                 0.4f * MathUtils.sin(Constants.LIGHT_MISSILE_WOBBLE_FREQUENCY * Utils.timeElapsed(startTime)));
         float dynamicalWidth = s / dynamicalLength;
 
+        // TODO: 25.08.2018 here was used nor() which implies sqrt() method
         Vector2 norVelocity = new Vector2(velocity).nor();
         Vector2 front = new Vector2(position).add(new Vector2(norVelocity).scl(dynamicalLength / 2));
 
@@ -61,10 +64,10 @@ public class LightMissile extends Missile {
 //                0.6f * dynamicalWidth);
 
         // (position - velocity.nor, position)
-        renderer.setColor(Color.YELLOW);
+        renderer.setColor(Color.ORANGE);
         drawMissile(renderer, front, norVelocity, dynamicalLength, dynamicalWidth, 1);
         front = new Vector2(position).add(new Vector2(norVelocity).scl(0.6f * dynamicalLength / 2));
-        renderer.setColor(Color.WHITE);
+        renderer.setColor(new Color(1,0.7f,0,0));
         drawMissile(renderer, front, norVelocity, dynamicalLength, dynamicalWidth, 0.6f);
 
     }

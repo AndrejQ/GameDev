@@ -26,6 +26,8 @@ public class MissilesManager {
                 missiles.removeValue(missile, false);
             }
         }
+
+
     }
 
     public void render(SpriteBatch batch, ShapeRenderer renderer){

@@ -8,6 +8,7 @@ import com.mygdx.game.entities.GG;
 import com.mygdx.game.entities.GrayGG;
 import com.mygdx.game.entities.YellowGG;
 import com.mygdx.game.entities.enemies.EnemiesManager;
+import com.mygdx.game.entities.enemies.Octopus;
 import com.mygdx.game.entities.missiles.MissilesManager;
 import com.mygdx.game.entities.particles.ParticleManager;
 import com.mygdx.game.utilits.Constants;
@@ -40,6 +41,8 @@ public class Level {
         else if (gg_key.equals(Constants.YELLOW_GG_KEY))
             gg = new YellowGG(new Vector2(10, 10), new Vector2(), this);
         enemiesManager = new EnemiesManager(gg);
+        enemiesManager.enemies.add(new Octopus(new Vector2(50, 0), new Vector2(), this));
+        Gdx.app.log("octopus", "added");
     }
 
     public void update(float delta){

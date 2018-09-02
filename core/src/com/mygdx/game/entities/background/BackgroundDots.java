@@ -77,4 +77,8 @@ public class BackgroundDots {
         float r = 1 - Utils.pow(x / a, 4) - Utils.pow(y / b, 4);
         return r >= 0 ? r : 0;
     }
+
+    public void resize(){
+        init();
+    }
 }
